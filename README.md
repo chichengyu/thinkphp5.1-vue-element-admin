@@ -47,7 +47,7 @@
 #### Getting started
 ```
 # clone the project
-git clone https://github.com/chichengyu/thinkphp5.1-vue-element-admin.git
+git clone https://gitee.com/chichengyu/thinkphp5.1-vue-element-admin.git
 
 # install dependency
 composer install  
