@@ -83,12 +83,13 @@ npm run watch
 
 #### 安装异常
 可能会出现的异常情况  
-######路由报错
+######路由报错  
 ```Uncaught (in promise) NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}```，这是可能路由安装的是报错的版本，解决方法：
 ```
 npm uninstall -S vue-router@3.0
 ```
 重新安装一个稳定的版本
+
 ######该异常可能会出现
     ```
     npm ERR! path C:\Users\admin\Desktop\abc\node_modules\less
