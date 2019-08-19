@@ -82,7 +82,6 @@ npm run watch
 ```
 
 #### 安装异常
-
     + 路由报错
     ```Uncaught (in promise) NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}```，这是可能路由安装的是报错的版本，解决方法：
     ```
