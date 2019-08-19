@@ -88,7 +88,16 @@ npm run watch
     ```
     npm uninstall -S vue-router@3.0
     ```
-    重新安装一个稳定的版本
+    重新安装一个稳定的版本，或者，在 main.js中，加上如下代码：
+    ```
+    import VueRouter from 'vue-router'
+    
+    // 解决路由报错 Uncaught (in promise) NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}
+    const originalPush = VueRouter.prototype.push;
+    VueRouter.prototype.push = function push(location) {
+      return originalPush.call(this, location).catch(err => err)
+    };
+    ```
 
 + 该异常可能会出现
     ```
