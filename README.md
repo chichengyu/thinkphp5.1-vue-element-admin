@@ -81,6 +81,27 @@ npm run build
 npm run watch
 ```
 
+#### 安装异常
+
+    + 路由报错
+    ```Uncaught (in promise) NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}```，这是可能路由安装的是报错的版本，解决方法：
+    ```
+    npm uninstall -S vue-router@3.0
+    ```
+    重新安装一个稳定的版本
+    + 该异常可能会出现
+    ```
+    npm ERR! path C:\Users\admin\Desktop\abc\node_modules\less
+    npm ERR! code EISGIT
+    npm ERR! git C:\Users\admin\Desktop\abc\node_modules\less: Appears to be a git repo or submodule.
+    npm ERR! git     C:\Users\admin\Desktop\abc\node_modules\less
+    npm ERR! git Refusing to remove it. Update manually,
+    npm ERR! git or move it out of the way first.
+    
+    npm ERR! A complete log of this run can be found in:
+    npm ERR!     C:\Users\admin\AppData\Roaming\npm-cache\_logs\2019-08-19T01_12_12_963Z-debug.log
+    ```
+
 #### 使用说明
 ThinkPHP5.1、Vue、element的使用就不在此多说了，这里要说的是前后分离时的 **权限控制**，这里介绍两种方法，两种都需要前后配合  
    + [Vue-Router的meta元信息](https://router.vuejs.org/zh/guide/advanced/meta.html)  
