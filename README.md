@@ -88,7 +88,7 @@ npm run watch
 ```
 npm uninstall -S vue-router@3.0
 ```
-    重新安装一个稳定的版本
+重新安装一个稳定的版本
 
 + 该异常可能会出现
     ```
