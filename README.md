@@ -85,10 +85,10 @@ npm run watch
 可能会出现的异常情况  
 + 路由报错  
 ```Uncaught (in promise) NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}```，这是可能路由安装的是报错的版本，解决方法：
-```
-npm uninstall -S vue-router@3.0
-```
-重新安装一个稳定的版本
+    ```
+    npm uninstall -S vue-router@3.0
+    ```
+    重新安装一个稳定的版本
 
 + 该异常可能会出现
     ```
@@ -102,6 +102,7 @@ npm uninstall -S vue-router@3.0
     npm ERR! A complete log of this run can be found in:
     npm ERR!     C:\Users\admin\AppData\Roaming\npm-cache\_logs\2019-08-19T01_12_12_963Z-debug.log
     ```
+    去掉 ```image-webpack-loader```在进行安装即可。
 
 #### 使用说明
 ThinkPHP5.1、Vue、element的使用就不在此多说了，这里要说的是前后分离时的 **权限控制**，这里介绍两种方法，两种都需要前后配合  
