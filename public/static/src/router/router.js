@@ -56,13 +56,13 @@ router.beforeEach((to,from,next) => {
 				if (hasAccess(store.getters.userInfo,to)) {
 					next();
 				} else {
-					ElementUI.Message.error('你没有权限访问');
+					ElementUI.Message.error({message:'你没有权限访问',center: true});
 					NProgress.done();
 					next({path:'/401',replace:true});
 				}
 			}
 		}else {
-			ElementUI.Message.error('请先登录');
+			ElementUI.Message.error({message:'请先登录',center: true});
 			NProgress.done();
 			next('/login');
 		}
@@ -70,7 +70,7 @@ router.beforeEach((to,from,next) => {
 });
 router.afterEach((to,from) => {
 	if (to.path === '*') {
-		ElementUI.Message.error('页面不存在');
+		ElementUI.Message.error({message:'页面不存在',center: true});
 	}
 	NProgress.done();
 });
