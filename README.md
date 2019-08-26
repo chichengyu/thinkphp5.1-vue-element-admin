@@ -111,7 +111,16 @@ npm run watch
     npm ERR! A complete log of this run can be found in:
     npm ERR!     C:\Users\admin\AppData\Roaming\npm-cache\_logs\2019-08-19T01_12_12_963Z-debug.log
     ```
-    去掉 ```image-webpack-loader```在进行安装即可。
+    或
+    ```
+    ‼ Command failed: C:\Users\admin\Desktop\www\element\node_modules\pngquant-bin\vendor\pngquant.exe --version
+    ‼ pngquant pre-build test failed                                                                                        i compiling from source
+    × Error: pngquant failed to build, make sure that libpng-dev is installed
+        at Promise.all.then.arr (C:\Users\admin\Desktop\www\element\node_modules\bin-build\node_modules\execa\index.js:231:11)
+        at process._tickCallback (internal/process/next_tick.js:68:7)
+    npm WARN thinkphp5.1-vue-element-admin@1.0.0 No repository field.
+    ```
+    去掉 ```image-webpack-loader```在重新进行安装即可。
 
 #### 使用说明
 ThinkPHP5.1、Vue、element的使用就不在此多说了，这里要说的是前后分离时的 **权限控制**，这里介绍两种方法，两种都需要前后配合  
