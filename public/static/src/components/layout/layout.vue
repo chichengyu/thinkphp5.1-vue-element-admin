@@ -181,14 +181,12 @@ export default {
     border-bottom: 1px solid #f5f6f6;
 }
 .tabBtn{
-    border-bottom: 1px solid #f5f6f6;
-    box-shadow: 0 0 0 0 rgba(0,0,0,.5);
-    /*box-shadow: 0 1px 3px 0 rgba(0,0,0,.12), 0 0 3px 0 rgba(0,0,0,.04);*/
-}
-.tabBtn{
     padding-top: 2px;
     padding-bottom: 2px;
+    border-bottom: 1px solid #f5f6f6;
+    box-shadow: 0 0 0 0 rgba(0,0,0,.5);
     user-select: none;
+    /*box-shadow: 0 1px 3px 0 rgba(0,0,0,.12), 0 0 3px 0 rgba(0,0,0,.04);*/
 }
 .tabBtn .tabBtnActive,.el-tag:hover{
     background-color: #42b983 !important;
