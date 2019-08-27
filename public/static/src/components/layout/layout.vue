@@ -40,11 +40,11 @@
             </el-header>
             <div class="tabBtn">
                 <template v-if="tabBtnList.length" v-for="(item,key) in tabBtnList" >
-                    <router-link tag='span' class="txt" :to="item.path">
-                        <el-tag size="small" :key="key" :class="item.tabBtnActive?'tabBtnActive':''" @click="handleBtnClickEvent(item,key)" @close="handleBtnCloseEvent(key)" closable>
-                            {{ item.name }}
-                        </el-tag>
-                    </router-link>
+<!--                <router-link tag='span' class="txt" :to="item.path">-->
+                    <el-tag size="small" :key="key" :class="item.tabBtnActive?'tabBtnActive':''" @click.native="handleBtnClickEvent(item,key)" @close="handleBtnCloseEvent(key)" closable>
+                        {{ item.name }}
+                    </el-tag>
+<!--                </router-link>-->
                 </template>
             </div>
             <el-main>
@@ -152,6 +152,7 @@ export default {
             this.tabBtnList.map(item => item.tabBtnActive=false);
             this.tabBtnList[index].tabBtnActive = true;
             this.siderBarListFindSelected(currentBtnItem);
+            this.$router.push(currentBtnItem.path);
         },
         handleBtnCloseEvent (index){
             if (this.tabBtnList.length <= 1)return this.warning('已达上限，不能关闭！');
