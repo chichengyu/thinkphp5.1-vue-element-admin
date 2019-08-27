@@ -6,10 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -p --env production --mode production --progress --color --config webpack.config.js",
-    "watch": "npx webpack -d --env development --mode development --devtool cheap-module-eval-source-map --watch --progress --color --config webpack.config.js",
-    "build:dev": "npx webpack -d --env development --mode development --devtool cheap-module-eval-source-map --progress --color --config webpack.config.js",
-    "dev": "npx webpack-dev-server -d --env development --mode development --devtool cheap-module-eval-source-map --progress --inline --hot --open --config webpack.config.js"
+    "build": "webpack -p --env production --mode production --progress --display-reasons --color --config webpack.config.js",
+    "watch": "npx webpack -d --env development --mode development --devtool cheap-module-eval-source-map --watch --progress --display-reasons --color --config webpack.config.js",
+    "build:dev": "npx webpack -d --env development --mode development --devtool cheap-module-eval-source-map --progress --display-reasons --color --config webpack.config.js",
+    "dev": "npx webpack-dev-server -d --env development --mode development --devtool cheap-module-eval-source-map --progress --display-reasons --inline --hot --open --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
