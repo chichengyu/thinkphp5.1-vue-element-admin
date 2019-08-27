@@ -10,11 +10,14 @@ import directives from './permission.js'
 import utils from './lib/utils'
 
 // import 'font-awesome/css/font-awesome.min.css' // https://www.thinkcmf.com/font/font_awesome/icons.html
+import 'normalize.css'
+import './assets/style/globalstyle.css'
+
 
 Vue.use(directives);
 Vue.use(utils);
 
-import 'normalize.css'
+
 // NProgress.inc(0.2)
 // NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 

@@ -61,87 +61,46 @@ const routesMap = [
 		]
 	},
 	{
-		path:'/a',
+		path:'/editor',
 		component: Layout,
-		redirect:'/a/index',
+		redirect:'/editor/index',
 		children:[
 			{
 				path:'index',
-				name:'a',
+				name:'editor',
 				meta:{
-					title:'aaaa',
+					title:'富文本',
 					icon:'el-icon-s-data',
 				},
-				component: () => import(/* webpackChunkName: "a" */ '@/views/test/a.vue')
+				component: () => import(/* webpackChunkName: "editor" */ '@/views/components/editor')
 			}
 		]
 	},
 	{
-		path:'/b',
-		component: Layout,
-		redirect:'/b/index',
-		children:[
-			{
-				path:'index',
-				name:'b',
-				meta:{
-					title:'bbbbb',
-					icon:'el-icon-s-data',
-				},
-				component: () => import(/* webpackChunkName: "b" */ '@/views/test/b.vue')
-			}
-		]
-	},
-	{
-		path:'/c',
-		component: Layout,
-		redirect:'/c/index',
-		children:[
-			{
-				path:'index',
-				name:'c',
-				meta:{
-					title:'ccccc',
-					icon:'el-icon-s-data',
-				},
-				component: () => import(/* webpackChunkName: "c" */ '@/views/test/c.vue')
-			}
-		]
-	},
-	{
-		path:'/abc',
+		path:'/components',
 		component: Layout,
 		meta:{
-			title:'权限管理',
+			title:'组件',
 			icon:'el-icon-s-data',
 		},
 		children:[
 			{
-				path:'a',
-				name:'abc-a',
+				path:'table',
+				name:'table',
 				meta:{
-					title:'用户组',
+					title:'表格',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "test-abc-a" */ '@/views/test/a.vue')
+				component: () => import(/* webpackChunkName: "table" */ '@/views/components/table')
 			},
 			{
-				path:'b',
-				name:'abc-b',
+				path:'treetable',
+				name:'treetable',
 				meta:{
-					title:'权限列表',
+					title:'树形表格',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "test-abc-b" */ '@/views/test/b.vue')
-			},
-			{
-				path:'c',
-				name:'abc-c',
-				meta:{
-					title:'测试',
-					icon:true,
-				},
-				component: () => import(/* webpackChunkName: "test-abc-c" */ '@/views/test/c.vue')
+				component: () => import(/* webpackChunkName: "treetable" */ '@/views/components/table/treetable')
 			}
 		],
 	},
