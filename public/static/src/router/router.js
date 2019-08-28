@@ -44,7 +44,7 @@ router.beforeEach((to,from,next) => {
 				store.dispatch('getUserInfo',isLogin).then(rlues => {
 					store.dispatch('concatRlues',rlues).then(routes => {
 						// 解决：动态挂载提示Duplicate named routes definition: { name: "home", path: "/home/index" }
-						router.matcher = new VueRouter({mode: 'history'}).matcher;
+						router.matcher = new VueRouter({scrollBehavior:()=>({y:0})}).matcher;
 						router.addRoutes(routes);
 						next({ ...to, replace: true });
 					}).catch(err => {

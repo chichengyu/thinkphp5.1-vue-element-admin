@@ -36,9 +36,9 @@ export default {
                     this.$ls.clear();
                     this.$store.dispatch('clearLoginOut');
                     this.$router.push('/login');
-                    // setTimeout(() => {
-                        // window.location.reload();
-                    // },600);
+                    setTimeout(() => {
+                        window.location.reload();
+                    },600);
                 // }
             // })
         }
