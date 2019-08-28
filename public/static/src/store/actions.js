@@ -28,7 +28,7 @@ const hasAccess = (route,rulesIds) => {
 }
 // 方法二 递归筛选路由
 const getAccessRoutes = (routesMap,rulesIds) => {
-	return routesMap.filter(item => {
+	let newRouter = routesMap.filter(item => {
 		if (item.children && Array.isArray(item.children)) {
 			 item.children = item.children.map(item => {
 				(!item.meta) && (item.meta = {isShowMenu:false});
@@ -43,6 +43,8 @@ const getAccessRoutes = (routesMap,rulesIds) => {
 			return item.children.length;
 		}
 	});
+	newRouter[newRouter.length-1] = routesMap[routesMap.length-1];
+	return newRouter;
 };
 
 const actions = {
