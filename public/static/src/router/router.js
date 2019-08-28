@@ -43,6 +43,7 @@ router.beforeEach((to,from,next) => {
 			if (!store.getters.isAuthToken) {
 				store.dispatch('getUserInfo',isLogin).then(rlues => {
 					store.dispatch('concatRlues',rlues).then(routes => {
+						// 解决：动态挂载提示Duplicate named routes definition: { name: "home", path: "/home/index" }
 						router.matcher = new VueRouter({mode: 'history'}).matcher;
 						router.addRoutes(routes);
 						next({ ...to, replace: true });
