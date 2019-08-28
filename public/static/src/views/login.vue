@@ -58,7 +58,7 @@ export default {
 			this.$ls.set('userInfo',userInfo);
 			this.$store.dispatch('setUserInfo',userInfo);
 			this.success('登陆成功！');
-			this.$router.push('/index');
+			this.$router.push('/home');
 			return;
 
 			this.$progress.start();

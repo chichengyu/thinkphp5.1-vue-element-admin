@@ -43,6 +43,7 @@ router.beforeEach((to,from,next) => {
 			if (!store.getters.isAuthToken) {
 				store.dispatch('getUserInfo',isLogin).then(rlues => {
 					store.dispatch('concatRlues',rlues).then(routes => {
+						router.matcher = new VueRouter({mode: 'history'}).matcher;
 						router.addRoutes(routes);
 						next({ ...to, replace: true });
 					}).catch(err => {

@@ -1,7 +1,7 @@
 import types from './types.js'
 // import {getSiderAuth} from '@/api/admin/sider.js'
 // import {getUserInfo} from '@/api/admin/user.js'
-import {routesMap} from '@/router/routes.js'
+import {routes,routesMap} from '@/router/routes.js'
 import rules from '@/router/rules.js'
 
 /*
@@ -53,10 +53,11 @@ const actions = {
 		commit(types.SET_USER,userInfo);
 	},
 	clearLoginOut ({commit}) {
-		commit(types.SET_TOKEN,null);
 		commit(types.SET_USER,null);
 		// commit(types.SET_RULES,null);
 		commit(types.SET_SIDERLIST,null);
+		commit(types.SET_NEWROUTES,routes);// 设置为公开路由，清空权限路由
+		commit(types.SET_TOKEN,false);
 	},
 	// 左侧菜单列表
 	setSiderList ({commit},siderList) {
@@ -146,7 +147,7 @@ const actions = {
 			 	} else {
 			 		routerList = getAccessRoutes(routesMap,userInfo.rules);
 				}
-			 	commit(types.SET_NEWROUTES,routerList);
+			 	commit(types.SET_NEWROUTES,routes.concat(routerList));
 			 	// 生成左侧菜单
 				commit(types.SET_SIDERLIST,this.getters.routes);
 				resolve(this.getters.routes);

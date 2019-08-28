@@ -1,6 +1,6 @@
 <template>
 	<div class="admin-index">
-		1231321321231
+		1231321321231    ---   {{ this.$store.getters.isAuthToken }}
 		<!-- 统计图 -->
 <!--		<echarts></echarts>-->
 	</div>

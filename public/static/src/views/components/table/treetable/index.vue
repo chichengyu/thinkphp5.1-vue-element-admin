@@ -1,6 +1,7 @@
 <template>
     <div class="table">
         <el-table
+            v-loading="loading"
             :data="tableData"
             tooltip-effect="dark"
             border
@@ -48,7 +49,7 @@
         </el-table>
 
         <!-- 分页 -->
-        <el-pagination align="right" background layout="prev, pager, next" :total="1000" :current-page="3" @current-change="changeCurrentPage"></el-pagination>
+        <el-pagination align="right" background layout="prev, pager, next" :total="totalPage" :current-page="currentPage" @current-change="changeCurrentPage"></el-pagination>
     </div>
 </template>
 
@@ -60,11 +61,15 @@ export default {
             console.log(row);
         },
         changeCurrentPage(currentPage){
+            this.loading = false;
             console.log(currentPage);
         }
     },
     data() {
         return {
+            loading:true,
+            totalPage:100,
+            currentPage:1,
             tableData: [{
                 id: 1,
                 date: '2016-05-02',

@@ -62,11 +62,7 @@ const getMenuList = (routesList,nowRole) => {
 
 const mutations = {
 	[types.SET_TOKEN] (state,isAuthToken) {
-		if (isAuthToken){
-			state.isAuthToken = isAuthToken;
-		}else{
-			state.isAuthToken = false;
-		}
+		state.isAuthToken = isAuthToken;
 	},
 	[types.SET_USER] (state,userInfo) {
 		if (userInfo){
@@ -78,7 +74,8 @@ const mutations = {
 	// // 合并过滤后的路由新数组，并更新获取权限状态
 	[types.SET_NEWROUTES] (state,newRoutes) {
 		// 合并过滤后的路由新数组
-		state.routes = state.routes.concat(newRoutes);
+		state.routes = newRoutes;
+		// state.routes = state.routes.concat(newRoutes);
 		// state.routes = newRoutes.concat(state.routes);
 		// 更新获取状态
 		state.isAuthToken = true;
