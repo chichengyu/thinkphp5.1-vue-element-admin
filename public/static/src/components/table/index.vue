@@ -44,7 +44,7 @@
                         :prop="col.prop"
                         :label="col.title"
                         :width="col.width"
-                        :min-width="col.width"
+                        :min-width="col.minWidth"
                         :sortable="col.sort"
                         :formatter="col.formatter"
                         :show-overflow-tooltip="col.tooltip"
