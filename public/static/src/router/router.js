@@ -1,4 +1,5 @@
-import Vue from 'Vue'
+// import Vue from 'Vue'
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 import Storage from 'vue-ls'

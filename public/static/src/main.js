@@ -2,7 +2,8 @@
 
 
 // 引入包
-import Vue from 'Vue'
+// import Vue from 'Vue'
+import Vue from 'vue'
 import store from './store/index.js'
 import App from './App.vue'
 import router from './router/router.js'

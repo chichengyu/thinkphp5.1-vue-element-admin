@@ -172,7 +172,7 @@ module.exports = {
         }, {
             test: /\.vue$/,
             use: 'vue-loader'
-        }, {
+        }, /*{
           test: /\.tsx?$/,
           use: 'ts-loader',
           exclude: /node_modules/
