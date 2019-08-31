@@ -6,6 +6,7 @@
 
 <script>
 import TableData from '@/components/table'
+
 export default {
     name:'Table',
     components:{
@@ -53,8 +54,8 @@ export default {
     methods: {
         // 列初始化
         labelInit(){
-            return [{prop:'id',title:'ID',type:'index',fixed:true,align:'center'},
-                    {prop:'name',title:'名称'},
+            return [{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
+                    {prop:'name',title:'名称',width:100},
                     {prop:'date',title:'日期',formatter:(row, column, value, index) => {
                         // console.log(row);
                         // console.log(column);
@@ -64,7 +65,7 @@ export default {
                     }},
                     {prop:'province',title:'省份'},
                     {prop:'city',title:'城市'},
-                    {prop:'address',title:'地址',tooltip:true},
+                    {prop:'address',title:'地址',tooltip:true,width:150},
                     {prop:'zip',title:'邮编',sort:'custom'},
                     {prop:'status',title:'状态',isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}];
         },
@@ -73,8 +74,8 @@ export default {
             return [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,},
                 {id:2, date: '2016-05-04', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1517 弄', zip: 200333, status:1,},
                 {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,},
-                {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,},
-                {id:4, date: '2016-05-03', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1516 弄', zip: 200333, status:0,}]
+                {id:4, date: '2016-05-03', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1516 弄', zip: 200333, status:0},
+                {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,}]
         },
         // 分页初始化处理
         handlePage(){
@@ -93,7 +94,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.el-pagination.is-background >>> .btn-next, .el-pagination.is-background >>> .btn-prev, .el-pagination.is-background >>> .el-pager li{
-    background-color: #fff;
-}
+
 </style>
