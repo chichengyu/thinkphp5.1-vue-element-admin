@@ -87,7 +87,7 @@
                             placement="top-end"
                             width="120" style="margin-left: 10px">
                             <div style="text-align: center; margin: 0">
-                                <h4><i class="el-icon-warning" style="margin-right:6px;color:#ff9900;"></i>你确定删除吗？</h4>
+                                <h4 style="margin-top:.6rem;"><i class="el-icon-warning" style="margin-right:6px;color:#ff9900;"></i>你确定删除吗？</h4>
                                 <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel(item,scope)">取消</el-button>
                                 <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk(item,scope)">确定</el-button>
                             </div>
@@ -186,5 +186,9 @@ util.treeTableXcode = function(data,xcode){
 .el-pagination.is-background >>> .btn-next, .el-pagination.is-background >>> .btn-prev, .el-pagination.is-background >>> .el-pager li{
     background-color: #fff;
     font-weight: 400;
+}
+.el-pagination{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 </style>
