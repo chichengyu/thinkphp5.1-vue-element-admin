@@ -49,10 +49,10 @@
                         :formatter="col.formatter"
                         align="center">
                         <template slot-scope="scope">
-                            <div v-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" style="margin-left:-1.1em;cursor: pointer;">
+                            <div v-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" style="margin-left:-1.3em;cursor: pointer;">
                                 <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
                                 <i class="el-icon-arrow-right" v-else></i>
-                                <span >{{ scope.row[col.prop] }}</span>
+                                <span>{{ scope.row[col.prop] }}</span>
                             </div>
                             <div v-else-if="col.tooltip">
                                 <el-tooltip placement="top">
