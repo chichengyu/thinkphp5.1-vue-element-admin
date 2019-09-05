@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import WangEditor from '@/components/wangEditor/wangEditor.vue'
+import WangEditor from '@/components/wangEditor'
 
 export default {
     name: "editor",

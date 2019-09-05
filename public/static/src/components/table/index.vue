@@ -165,7 +165,7 @@ export default {
             if(!item.children)return index;
             //收缩
             item.open = false;
-            this.data.tableData.splice(Number(index)+1,2);
+            this.data.tableData.splice(Number(index)+1,item.children.length);
         },
     },
 }

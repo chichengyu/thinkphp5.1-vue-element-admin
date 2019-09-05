@@ -43,6 +43,7 @@ const getAccessRoutes = (routesMap,rulesIds) => {
 			return item.children.length;
 		}
 	});
+	// newRouter[newRouter.length-1] = routesMap[routesMap.length-1];
 	newRouter[newRouter.length-1] = routesMap[routesMap.length-1];
 	return newRouter;
 };

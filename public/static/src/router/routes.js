@@ -1,4 +1,4 @@
-import Layout from '@/components/layout/layout.vue'
+import Layout from '@/components/layout'
 /**
  * 	注意：
  * 		权限是通过 rules.js 权限id映射文件来进行控制的，筛选时通过路由中的 name 属性来进行定位，所以 name 必须填写，且唯一
@@ -101,6 +101,33 @@ const routesMap = [
 					icon:true,
 				},
 				component: () => import(/* webpackChunkName: "treetable" */ '@/views/components/table/treetable')
+			},
+			{
+				path:'dialog',
+				name:'dialog',
+				meta:{
+					title:'Dialog',
+					icon:true,
+				},
+				component: () => import(/* webpackChunkName: "dialog" */ '@/views/components/dialog')
+			},
+			{
+				path:'preview',
+				name:'preview',
+				meta:{
+					title:'preview',
+					icon:true,
+				},
+				component: () => import(/* webpackChunkName: "preview" */ '@/views/components/preview')
+			},
+			{
+				path:'upload',
+				name:'upload',
+				meta:{
+					title:'upload',
+					icon:true,
+				},
+				component: () => import(/* webpackChunkName: "upload" */ '@/views/components/upload')
 			}
 		],
 	},

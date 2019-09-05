@@ -134,7 +134,16 @@ export default {
                         address: '上海市普陀区金沙江路 1519 弄',
                         status:0,
                         zip: 200333,
-                    }]},]
+                    },{
+                        id: 43,
+                        date: '2016-05-01',
+                        level: '2',
+                        name: '5555',
+                        province: '上海',
+                        city: '普陀区',
+                        address: '上海市普陀区金沙江路 1519 弄',
+                        status:0,
+                        zip: 200333,}]}]
         },
         // 分页初始化处理
         handlePage(){
