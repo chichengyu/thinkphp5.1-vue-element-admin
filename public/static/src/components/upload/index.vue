@@ -9,7 +9,7 @@
             :headers="headers"
             :file-list="fileImageList"
             :data="params"
-            @on-exceed="handleExceed"
+            @before-upload="handleBefore"
             @on-success="handleSuccess"
             @on-error="handleError">
             <i slot="default" class="el-icon-plus avatar-uploader-icon"></i>
@@ -99,23 +99,20 @@ export default {
     },
     methods: {
         handleRemove(file) {
-            console.log(file);
+            this.$emit('upload-remove',file);
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
             this.visible = true;
         },
-        handleDownload(file) {
-            console.log(file);
-        },
-        handleExceed(response, file, fileList){
-            console.log(300000);
+        handleBefore(file){
+            this.$emit('upload-before',file);
         },
         handleSuccess(response, file, fileList){
-            console.log(10);
+            this.$emit('upload-success',response, file, fileList);
         },
         handleError(err, file, fileList){
-            console.log(20);
+            this.$emit('upload-error',err, file, fileList);
         }
     }
 }
