@@ -2,8 +2,9 @@
 	<div class="app">
 		<!-- <router-view></router-view> -->
 		<keep-alive>
-			<router-view/>
+			<router-view v-if="$route.meta.cache"/>
 		</keep-alive>
+		<router-view v-if="!$route.meta.cache"/>
 	</div>
 </template>
 
