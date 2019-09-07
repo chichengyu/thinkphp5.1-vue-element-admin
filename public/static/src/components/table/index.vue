@@ -60,7 +60,10 @@
                                     <div style="width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">{{ scope.row[col.prop] }}</div>
                                 </el-tooltip>
                             </div>
-                            <div v-else>{{ scope.row[col.prop] }}</div>
+                            <div v-else>
+                                <div v-if="col.render">{{ col.render(scope) }}</div>
+                                <div v-else>{{ scope.row[col.prop] }}</div>
+                            </div>
                         </template>
                     </el-table-column>
                 </template>

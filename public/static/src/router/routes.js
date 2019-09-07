@@ -128,6 +128,15 @@ const routesMap = [
 					icon:true,
 				},
 				component: () => import(/* webpackChunkName: "upload" */ '@/views/components/upload')
+			},
+			{
+				path:'form',
+				name:'form',
+				meta:{
+					title:'form',
+					icon:true,
+				},
+				component: () => import(/* webpackChunkName: "form" */ '@/views/components/form')
 			}
 		],
 	},

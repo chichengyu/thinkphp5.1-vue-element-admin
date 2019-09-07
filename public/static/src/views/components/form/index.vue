@@ -1,0 +1,92 @@
+<template>
+    <div class="form" style="background:#fff;">
+        <form-data :width="50" :form="form"></form-data>
+    </div>
+</template>
+
+<script>
+import formData from '@/components/form'
+export default {
+    name: "Form",
+    components:{
+        formData
+    },
+    data () {
+        return {
+            form:{
+                formFields:{
+                    name: '',
+                    number:1,
+                    password: '',
+                    text: '',
+                    select: '',
+                    radio: '1',
+                    radiosButton: '1',
+                    checkbox: ['1','2'],
+                    date: '2019-09-07'
+                },
+                formLable:[
+                    {prop: 'name', title: '名称', type: 'input',disabled:false},
+                    {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
+                    {prop: 'password', title: '密码', type: 'input',password:true},
+                    {prop: 'text', title: '文本域', type: 'textarea'},
+                    {prop: 'select', title: '下拉选择',type: 'select',options:[
+                        {label:'北京',value:1},
+                        {label:'上海',value:2},
+                        {label:'重庆',value:3}],
+                        change:(val) => {console.log(val);}
+                    },
+                    {prop: 'radio', title: '单选',type: 'radio',options:[
+                        {label:'男',value:'1'},
+                        {label:'女',value:'2'}],
+                        change:(val) => {console.log(val);}
+                    },
+                    {prop: 'radiosButton', title: '单选按钮',type: 'radioButton',options:[
+                        {label:'男',value:'1'},
+                        {label:'女',value:'2'}],
+                        change:(val) => {console.log(val);}
+                    },
+                    {prop: 'checkbox', title: '复选框', type: 'checkbox',options:[
+                        {label:'上海',value:'1'},
+                        {label:'重庆',value:'2'},
+                        {label:'北京',value:'3'}],
+                        change:(val) => {console.log(val);}
+                    },
+                    {prop: 'date', title: '日期', type: 'date',format:'yyyy-MM-dd', change:(val) => {console.log(val)}},
+                    {prop: 'dater', title: '日期范围', type: 'daterange',format:'yyyy-MM-dd', change:(val) => {console.log(val)}},
+                    {prop: 'datetime', title: '日期时间', type: 'datetime',format:'yyyy-MM-dd HH:mm:ss', change:(val) => {console.log(val)}},
+                    {prop: 'dateti', title: '日期时间', type: 'datetimerange', change:(val) => {console.log(val)}},
+                ],
+                rules: {
+                    name: [
+                        { required: true, message: '请输入活动名称', trigger: 'blur' },
+                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                    ],
+                    number: [
+                        { required: true, message: '请选择活动区域', trigger: 'change' }
+                    ],
+                    password: [
+                        { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+                    ],
+                    text: [
+                        { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+                    ],
+                    select: [
+                        { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+                    ],
+                    radio: [
+                        { required: true, message: '请选择活动资源', trigger: 'change' }
+                    ],
+                    radiosButton: [
+                        { required: true, message: '请填写活动形式', trigger: 'blur' }
+                    ]
+                }
+            },
+        }
+    }
+}
+</script>
+
+<style lang="css" scoped>
+
+</style>

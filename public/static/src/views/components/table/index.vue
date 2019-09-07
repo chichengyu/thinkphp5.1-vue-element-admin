@@ -63,7 +63,10 @@ export default {
                         // console.log(index);
                         return value + '--' + index;
                     }},
-                    {prop:'province',title:'省份'},
+                    {prop:'province',title:'省份',render:(val) => {
+                        console.log('render',val);
+                        return 123;
+                    }},
                     {prop:'city',title:'城市'},
                     {prop:'address',title:'地址',tooltip:true,width:150},
                     {prop:'zip',title:'邮编',sort:'custom'},
