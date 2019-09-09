@@ -7,7 +7,7 @@ const pageOffset = 10;// 每页显示的条数
 const ip = 'http://el.cn';
 // const ip = 'http://192.168.5.100:8001';
 
-const baseUrl = ip + '/api/v1';
+export const baseUrl = ip + '/api/v1';
 
 
 /********************* 图片管理 ***********************/
