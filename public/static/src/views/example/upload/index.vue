@@ -1,9 +1,19 @@
 <template>
     <div style="">
+        <!-- 单张 -->
         <upload :action="'#'" :previewImages="url"
-            @upload-before="handleBefore"
-            @upload-success="handleSuccess"
-            @upload-remove="handleRemove">
+            @before="handleBefore"
+            @success="handleSuccess"
+            @remove="handleRemove">
+        </upload>
+
+        <hr>
+
+        <!-- 多张 -->
+        <upload :action="'#'" :previewImages="images"
+            @before="handleBefore"
+            @success="handleSuccess"
+            @remove="handleRemove">
         </upload>
     </div>
 </template>

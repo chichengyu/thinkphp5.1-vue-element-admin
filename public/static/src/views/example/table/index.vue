@@ -28,9 +28,9 @@ export default {
                     label:'操作',
                     width:230,
                     buttons:[
-                        {prop:'detail',title:'查看',methods:(params) => {console.log(params)}},
-                        {prop:'edit',title:'编辑',type:'primary',methods:(params) => {console.log(params)}},
-                        {prop:'del',title:'删除',type:'danger',methods:{
+                        {title:'查看',methods:(params) => {console.log(params)}},
+                        {title:'编辑',directives:[{name:'has',value:'edit'}],type:'primary',methods:(params) => {console.log(params)}},
+                        {title:'删除',directives:[{name:'has',value:'del'}],type:'danger',methods:{
                             ok:(params) => {console.log('确认删除',params)},
                             cancel:(params) => {console.log('取消删除',params)}
                         }},
@@ -56,17 +56,11 @@ export default {
         labelInit(){
             return [{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
                     {prop:'name',title:'名称',width:100},
-                    {prop:'date',title:'日期',formatter:(row, column, value, index) => {
-                        // console.log(row);
-                        // console.log(column);
-                        // console.log(cellValue);
-                        // console.log(index);
-                        return value + '--' + index;
+                    {prop:'date',title:'日期',minWidth:150,render:(params) => {
+                        // console.log(params);
+                        return '日期：' + params.row.date;
                     }},
-                    {prop:'province',title:'省份',render:(val) => {
-                        console.log('render',val);
-                        return 123;
-                    }},
+                    {prop:'province',title:'省份'},
                     {prop:'city',title:'城市'},
                     {prop:'address',title:'地址',tooltip:true,width:150},
                     {prop:'zip',title:'邮编',sort:'custom'},

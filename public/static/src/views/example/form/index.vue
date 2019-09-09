@@ -23,13 +23,14 @@ export default {
                     radio: '1',
                     radiosButton: '1',
                     checkbox: ['1','2'],
-                    date: '2019-09-07'
+                    date: '2019-09-07',
+                    switch:true
                 },
                 formLable:[
-                    {prop: 'name', title: '名称', type: 'input',disabled:false},
+                    {prop: 'name', title: '名称', type: 'input',disabled:false,placeholder:'请输入姓名'},
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
                     {prop: 'password', title: '密码', type: 'input',password:true},
-                    {prop: 'text', title: '文本域', type: 'textarea'},
+                    {prop: 'text', title: '文本域', type: 'textarea',placeholder: '我是自定义内容'},
                     {prop: 'select', title: '下拉选择',type: 'select',options:[
                         {label:'北京',value:1},
                         {label:'上海',value:2},
@@ -56,6 +57,11 @@ export default {
                     {prop: 'dater', title: '日期范围', type: 'daterange',format:'yyyy-MM-dd', change:(val) => {console.log(val)}},
                     {prop: 'datetime', title: '日期时间', type: 'datetime',format:'yyyy-MM-dd HH:mm:ss', change:(val) => {console.log(val)}},
                     {prop: 'dateti', title: '日期时间', type: 'datetimerange', change:(val) => {console.log(val)}},
+                    {prop: 'switch', title: 'switch开关', type: 'switch',change:(val) => {console.log(val)}},
+                ],
+                buttons:[
+                    {title:'提交',type:'primary',method:() => {console.log('提交')}},
+                    {title:'重置',method:() => {console.log('重置')}},
                 ],
                 rules: {
                     name: [

@@ -99,20 +99,20 @@ export default {
     },
     methods: {
         handleRemove(file) {
-            this.$emit('upload-remove',file);
+            this.$emit('remove',file);
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
             this.visible = true;
         },
         handleBefore(file){
-            this.$emit('upload-before',file);
+            this.$emit('before',file);
         },
         handleSuccess(response, file, fileList){
-            this.$emit('upload-success',response, file, fileList);
+            this.$emit('success',response, file, fileList);
         },
         handleError(err, file, fileList){
-            this.$emit('upload-error',err, file, fileList);
+            this.$emit('error',err, file, fileList);
         }
     }
 }

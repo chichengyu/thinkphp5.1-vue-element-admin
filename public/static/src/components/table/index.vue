@@ -7,82 +7,57 @@
             :data="data.tableData"
             :default-sort="data.defaultSort"
             @sort-change="data.sortChange">
-
-            <template v-for="(col,key) in data.tableLabel">
-                <!-- 有 swicth 开关 -->
-                <template v-if="col.isSwitch">
-                    <el-table-column
-                        :key="key"
-                        :type="col.type"
-                        :fixed="col.fixed"
-                        :prop="col.prop"
-                        :label="col.title"
-                        :width="col.width"
-                        :min-width="col.width"
-                        :sortable="col.sort"
-                        :formatter="col.formatter"
-                        :show-overflow-tooltip="col.tooltip"
-                        :align="col.align||'left'">
-                        <template slot-scope="scope">
-                           <el-switch
-                               :disabled="col.isSwitch.disabled"
-                                v-model="scope.row.status"
-                                active-color="#52BEA6"
-                                inactive-color="#CACDD0"
-                                :active-value="1"
-                                :inactive-value="0"
-                                @change="col.isSwitch.change(scope.row)">
-                            </el-switch>
-                        </template>
-                    </el-table-column>
+            <!-- 列 -->
+            <el-table-column v-for="(col,key) in data.tableLabel"
+                :key="key"
+                :type="col.type"
+                :fixed="col.fixed"
+                :prop="col.prop"
+                :label="col.title"
+                :width="col.width"
+                :min-width="col.minWidth"
+                :sortable="col.sort"
+                :formatter="col.formatter"
+                :align="col.align||'left'">
+                <template slot-scope="scope">
+                    <!-- 有 swicth 开关 -->
+                    <el-switch v-if="col.isSwitch"
+                        :disabled="col.isSwitch.disabled"
+                        v-model="scope.row.status"
+                        active-color="#52BEA6"
+                        inactive-color="#ff4949"
+                        :active-value="1"
+                        :inactive-value="0"
+                        @change="col.isSwitch.change && col.isSwitch.change(scope)">
+                    </el-switch>
+                    <!-- tree树形 -->
+                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" style="margin-left:-1.3em;cursor: pointer;">
+                        <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
+                        <i class="el-icon-arrow-right" v-else></i>
+                        <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
+                    </div>
+                    <div v-else-if="col.tooltip">
+                        <el-tooltip placement="top">
+                            <div slot="content">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                            <div style="width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                        </el-tooltip>
+                    </div>
+                    <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
                 </template>
-                <template v-else>
-                    <el-table-column
-                        :key="key"
-                        :type="col.type"
-                        :fixed="col.fixed"
-                        :prop="col.prop"
-                        :label="col.title"
-                        :width="col.width"
-                        :min-width="col.width"
-                        :sortable="col.sort"
-                        :formatter="col.formatter"
-                        :align="col.align||'left'">
-                        <template slot-scope="scope">
-                            <div v-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" style="margin-left:-1.3em;cursor: pointer;">
-                                <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
-                                <i class="el-icon-arrow-right" v-else></i>
-                                <span>{{ scope.row[col.prop] }}</span>
-                            </div>
-                            <div v-else-if="col.tooltip">
-                                <el-tooltip placement="top">
-                                    <div slot="content">{{ scope.row[col.prop] }}</div>
-                                    <div style="width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">{{ scope.row[col.prop] }}</div>
-                                </el-tooltip>
-                            </div>
-                            <div v-else>
-                                <div v-if="col.render">{{ col.render(scope) }}</div>
-                                <div v-else>{{ scope.row[col.prop] }}</div>
-                            </div>
-                        </template>
-                    </el-table-column>
-                </template>
-            </template>
-
+            </el-table-column>
+            <!-- 操作 -->
             <el-table-column v-if="data.tableOption"
                 fixed="right"
                 :label="data.tableOption.label"
                 :width="data.tableOption.width"
                 :align="data.tableOption.align||'center'">
                 <template slot-scope="scope">
-                    <template v-if="data.tableOption.buttons">
-                        <el-button
-                            v-for="(item,key) in data.tableOption.buttons"
-                            :key="key"
-                            v-if="item.prop != 'del'"
+                    <template v-if="data.tableOption.buttons" v-for="(item,key) in data.tableOption.buttons">
+                        <el-button :key="key" v-if="item.title !== '删除'"
                             :type="item.type"
-                            @click="item.methods(scope.row)"
-                            size="mini">
+                            @click="item.methods(scope)"
+                            :size="item.size||'mini'"
+                            v-has="item.directives && item.directives.length && item.directives[0].value">
                             {{ item.title }}
                         </el-button>
                         <el-popover v-else
@@ -94,7 +69,7 @@
                                 <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel(item,scope)">取消</el-button>
                                 <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk(item,scope)">确定</el-button>
                             </div>
-                            <el-button :type="item.type" size="mini" slot="reference">删除</el-button>
+                            <el-button v-has="item.directives && item.directives.length && item.directives[0].value" :type="item.type" size="mini" slot="reference">删除</el-button>
                         </el-popover>
                     </template>
                 </template>
@@ -126,13 +101,15 @@ export default {
     methods: {
         // popover 框  / 确定删除
         handleOk(currentBtn,scope){
-            currentBtn.methods.ok(scope);
-            scope._self.$refs[`popover${scope.$index}`].$refs.popper.click();
+            // scope._self.$refs[`popover${scope.$index}`].$refs.popper.click();
+            scope._self.$el.click();
+            currentBtn.methods.ok && currentBtn.methods.ok(scope);
         },
         // popover 框  / 取消删除
         handleCancel(currentBtn,scope){
-            scope._self.$refs[`popover${scope.$index}`].$refs.popper.click();
-            currentBtn.methods.cancel(scope);
+            // scope._self.$refs[`popover${scope.$index}`].$refs.popper.click();
+            scope._self.$el.click();
+            currentBtn.methods.cancel && currentBtn.methods.cancel(scope);
         },
         treeClick:function(item,index){
             if(item.open){

@@ -56,12 +56,9 @@ export default {
         labelInit(){
             return [{prop:'id',title:'ID',type:'index',fixed:true,width:80},
                 {prop:'name',title:'名称',width:100,hasChildren:true,align:'center'},
-                {prop:'date',title:'日期',formatter:(row, column, value, index) => {
-                        // console.log(row);
-                        // console.log(column);
-                        // console.log(cellValue);
-                        // console.log(index);
-                        return value + '--' + index;
+                {prop:'date',title:'日期',render:(params) => {
+                        // console.log(params);
+                        return '--'+params.row.date;
                     }},
                 {prop:'province',title:'省份'},
                 {prop:'city',title:'城市'},

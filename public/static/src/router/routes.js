@@ -72,7 +72,7 @@ const routesMap = [
 					title:'富文本',
 					icon:'el-icon-s-data',
 				},
-				component: () => import(/* webpackChunkName: "editor" */ '@/views/components/editor')
+				component: () => import(/* webpackChunkName: "editor" */ '@/views/example/editor')
 			}
 		]
 	},
@@ -91,7 +91,7 @@ const routesMap = [
 					title:'表格',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "table" */ '@/views/components/table')
+				component: () => import(/* webpackChunkName: "table" */ '@/views/example/table')
 			},
 			{
 				path:'treetable',
@@ -100,7 +100,7 @@ const routesMap = [
 					title:'树形表格',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "treetable" */ '@/views/components/table/treetable')
+				component: () => import(/* webpackChunkName: "treetable" */ '@/views/example/treetable')
 			},
 			{
 				path:'dialog',
@@ -109,7 +109,7 @@ const routesMap = [
 					title:'Dialog',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "dialog" */ '@/views/components/dialog')
+				component: () => import(/* webpackChunkName: "dialog" */ '@/views/example/dialog')
 			},
 			{
 				path:'preview',
@@ -118,7 +118,7 @@ const routesMap = [
 					title:'preview',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "preview" */ '@/views/components/preview')
+				component: () => import(/* webpackChunkName: "preview" */ '@/views/example/preview')
 			},
 			{
 				path:'upload',
@@ -127,7 +127,7 @@ const routesMap = [
 					title:'upload',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "upload" */ '@/views/components/upload')
+				component: () => import(/* webpackChunkName: "upload" */ '@/views/example/upload')
 			},
 			{
 				path:'form',
@@ -136,7 +136,7 @@ const routesMap = [
 					title:'form',
 					icon:true,
 				},
-				component: () => import(/* webpackChunkName: "form" */ '@/views/components/form')
+				component: () => import(/* webpackChunkName: "form" */ '@/views/example/form')
 			}
 		],
 	},
