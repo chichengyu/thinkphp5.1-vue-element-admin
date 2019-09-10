@@ -22,7 +22,7 @@
 </template>
 <script>
 import md5 from 'md5'
-import { login } from '@/api/login.js'
+import { login } from '@/api/login'
 
 function hasErrors (fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field])
