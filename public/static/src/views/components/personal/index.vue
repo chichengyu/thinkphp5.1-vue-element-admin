@@ -5,7 +5,7 @@
         </span>
         <el-dropdown trigger="hover" style="cursor: pointer">
             <span class="el-dropdown-link">
-                <img src="@/assets/images/touxiang.gif" width="32" style="vertical-align: middle;border-radius: 8px">
+                <img src="@/assets/images/touxiang.png" width="32" style="vertical-align: middle;border-radius: 8px">
                 <i class="el-icon-caret-bottom el-icon--right" style="vertical-align: middle"></i>
             </span>
             <el-dropdown-menu slot="dropdown">

@@ -61,7 +61,7 @@
 
 <script>
 import FadeIn from '@/components/fadeIn/FadeIn.vue'
-import Personal from '@/views/components/personal/personal.vue'
+import Personal from '@/views/components/personal'
 export default {
     name:'Layout',
     components:{
