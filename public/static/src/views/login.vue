@@ -9,7 +9,7 @@
 							<el-input v-model="formInline.username" prefix-icon="el-icon-user" placeholder="请输入账号"></el-input>
 						</el-form-item>
 						<el-form-item label="">
-							<el-input v-model="formInline.password" prefix-icon="el-icon-lock" @keyup.enter.native="handleSubmit('formInline')" placeholder="请输入密码"></el-input>
+							<el-input v-model="formInline.password" :show-password="true" prefix-icon="el-icon-lock" @keyup.enter.native="handleSubmit('formInline')" placeholder="请输入密码"></el-input>
 						</el-form-item>
 						<el-form-item label="">
 							<el-button type="primary" @click.native="handleSubmit('formInline')">登录</el-button>

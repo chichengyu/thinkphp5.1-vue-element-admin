@@ -36,7 +36,7 @@ let hasAccess = (userInfo,meta) => {
 
 router.beforeEach((to,from,next) => {
 	NProgress.start();
-	var isLogin = Vue.ls.get(userInfo);
+	var isLogin = Vue.ls.get('userInfo');
 	if (to.path == '/login' || to.path == '/register') {
 		next();
 	}else{
