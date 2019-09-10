@@ -108,6 +108,7 @@ export default {
     },
     methods: {
         handleSelectMenu (index,indexPath) {
+            this.menuIndex = index;
             // 二级菜单
             let currentNav = null;
             if (String(index).includes('-')){
@@ -140,11 +141,17 @@ export default {
         siderBarListFindSelected(currentItem){
             this.siderBarList.find((item,key) => {
                 if (item.children){
-                    item.children.find((subItem,index) => {
-                        ((subItem.name == currentItem.name)&&(subItem.path == currentItem.path))&&(this.menuIndex = key + '-' + index);
-                    });
+                    return item.children.find((subItem,index) => {
+                        if((subItem.name == currentItem.name)&&(subItem.path == currentItem.path)){
+                            this.menuIndex = key + '-' + index;
+                            return true;
+                        }
+                    }) && true;
                 }else {
-                    ((item.name == currentItem.name)&&(item.path == currentItem.path))&&(this.menuIndex = String(key));
+                    if((item.name == currentItem.name)&&(item.path == currentItem.path)){
+                        this.menuIndex = String(key);
+                        return true;
+                    }
                 }
             });
         },
