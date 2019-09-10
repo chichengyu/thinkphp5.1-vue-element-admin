@@ -1,4 +1,4 @@
-import axios from './index.js'
+import axios from '@/api/index.js'
 
 /******************* 登陆 *******************/
 export const login = (data) => {
