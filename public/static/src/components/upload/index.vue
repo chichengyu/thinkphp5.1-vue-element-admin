@@ -9,9 +9,9 @@
             :headers="headers"
             :file-list="fileImageList"
             :data="params"
-            @before-upload="handleBefore"
-            @on-success="handleSuccess"
-            @on-error="handleError">
+            :before-upload="handleBefore"
+            :on-success="handleSuccess"
+            :on-error="handleError">
             <i slot="default" class="el-icon-plus avatar-uploader-icon"></i>
             <div slot="file" slot-scope="{file}">
                 <img class="el-upload-list__item-thumbnail" :src="file.url" width="100%" height="100%">
@@ -66,7 +66,7 @@ export default {
         previewImages:[String,Array],// 这个fileList是自己定义的一个文件列表，显示的文件就是这个里边的文件
         autoUpload:{// 是否在选取文件后立即进行上传
             type:Boolean,
-            default:false
+            default:true
         }
     },
     data() {
@@ -99,6 +99,7 @@ export default {
     },
     methods: {
         handleRemove(file) {
+            this.fileImageList.splice(this.fileImageList.indexOf(file),1);
             this.$emit('remove',file);
         },
         handlePictureCardPreview(file) {
