@@ -11,7 +11,7 @@ use think\facade\Request;
 class Base extends BaseController{
     protected $userInfo;
 
-    protected function initialize()
+   protected function initialize()
     {
         parent::initialize();
         $module = Request::module();
