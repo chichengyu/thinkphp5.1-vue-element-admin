@@ -3,26 +3,66 @@ namespace app\api\controller;
 
 use think\Controller;
 use app\lib\ResponseJson;
+use think\Request;
 
 class BaseController extends Controller{
     use ResponseJson;
 
     /**
-     * @param int $code    // 返回的状态吗
-     * @param string $msg  // 返回的提示信息
-     * @param bool $flag   // false表示请求失败，并返回失败的信息
-     * @param string $data // 返回的数据
-     * @return \think\response\Json
+     *  上传图片
      */
-    public function res_json($msg='', $code=0, $flag=false, $data=''){
-        $obj = [
-            'code'   => $code,
-            'msg'    => $msg,
-            'url'    => request()->url(true)
-        ];
-        if ($flag){
-            $obj['data'] = $data;
+    public function upload(Request $request,$image)
+    {
+        if ($request->isPost()){
+            $file = $request->file('file');
+            $res = $this->imageUpload($file,$image);
+            return json($res);
         }
-        return json($obj);
+    }
+
+    /**
+     * 删除上传图片
+     */
+    public function delUpload(Request $request)
+    {
+        if ($request->isPost()){
+            $path = input('post.path');
+            if (!$path){
+                return $this->responseError('参数有误');
+            }
+            if ($this->delImage($path)){
+                return $this->responseSuccess('删除成功');
+            }
+            return $this->responseError('删除失败');
+        }
+    }
+
+    /** 上传一张图片
+     * @param $file     文件对象
+     * @param $dirPath  保存路径
+     * @return array
+     */
+    protected function imageUpload($file,$dirPath){
+        $path = $_SERVER['DOCUMENT_ROOT'].'/';
+        $subPath = 'static/uploads/'.$dirPath.'/'.date('Y-m');
+        is_dir($path.$subPath) || mkdir($path.$subPath,0777,true);
+        $info = $file->validate(['size'=>1024*1024*2,'ext'=>'jpg,png,gif'])->rule('uniqid')->move($path.$subPath);
+        if ($info){
+            return ['code' => 1,'msg' => '上传成功','path'=>'/'.$subPath.'/'.$info->getFilename(),'ivew_path' => httpHost().$_SERVER['HTTP_HOST'].'/'.$subPath.'/'.$info->getFilename()];
+        }
+        return ['code' => 0,'msg' =>'上传失败' . $file->getError()];
+    }
+
+    /** 删除图片
+     * @param $path  图片路径
+     * @return bool
+     */
+    protected function delImage($path){
+        try{
+            @unlink('.'.$path);
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
     }
 }

@@ -14,14 +14,11 @@ import utils from './lib/utils'
 import 'normalize.css'
 import './assets/style/globalstyle.css'
 
-
 Vue.use(directives);
 Vue.use(utils);
 
-
 // NProgress.inc(0.2)
 // NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
-
 Vue.config.productionTip = false;
 const vm = new Vue({
 	el:'#app',

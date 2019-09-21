@@ -1,4 +1,4 @@
-import axios from '@/api/index.js'
+import axios from '@/api'
 
 /******************* 列表 *******************/
 export const getTableData = (page,limit) => {

@@ -33,7 +33,7 @@ export default {
                         {prop:'del',title:'删除',type:'danger',methods:{
                                 ok:(params) => {console.log('确认删除',params)},
                                 cancel:(params) => {console.log('取消删除',params)}
-                            }},
+                        }},
                     ]
                 },
                 // 分页

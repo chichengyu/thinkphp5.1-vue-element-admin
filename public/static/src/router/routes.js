@@ -140,6 +140,25 @@ const routesMap = [
 			}
 		],
 	},
+	{
+		path:'/auth',
+		component: Layout,
+		meta:{
+			title:'权限',
+			icon:'el-icon-s-data',
+		},
+		children:[
+			{
+				path:'group',
+				name:'group',
+				meta:{
+					title:'用户组',
+					icon:true,
+				},
+				component: () => import(/* webpackChunkName: "group" */ '@/views/components/auth/groups')
+			},
+		]
+	},
 	{path:'*',redirect:'/404',isMenu:false}
 ];
 

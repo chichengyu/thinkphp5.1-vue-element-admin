@@ -99,8 +99,23 @@ export default {
     },
     methods: {
         handleRemove(file) {
-            this.fileImageList.splice(this.fileImageList.indexOf(file),1);
-            this.$emit('remove',file);
+            if (file.response && file.response.path) {
+                this.axios.request({
+                    url:delUploadImageUrl,
+                    method:'post',
+                    data:{path:file.response.path}
+                }).then(res => {
+                    if (res.data.code == 1){
+                        this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1);
+                        this.success('删除成功！');
+                    }else{
+                        this.error('删除失败！');
+                    }
+                    this.$emit('remove',file);
+                }).catch(err => {
+                   return Promise.reject('删除失败！',err);
+                });
+            }
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
@@ -110,6 +125,12 @@ export default {
             this.$emit('before',file);
         },
         handleSuccess(response, file, fileList){
+            if (response.code == 1){
+                this.success('上传成功！');
+            }else{
+                this.error('上传失败！');
+            }
+            this.fileImageList = fileList;
             this.$emit('success',response, file, fileList);
         },
         handleError(err, file, fileList){
