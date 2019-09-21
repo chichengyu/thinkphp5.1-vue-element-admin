@@ -18,7 +18,9 @@ class Base extends BaseController{
         $controller = Request::controller();
         $action = Request::action();
         $url = $module.'/'.ltrim(strchr($controller,'.'),'.').'/'.$action;
-
+        if (in_array(strtolower($url),config('routes.pay'))){
+            return true;
+        }
         $token = Request::instance()->header('token');
         if (!$token){
             throw new LoginException();
@@ -38,7 +40,7 @@ class Base extends BaseController{
                 session(null);
                 throw new LoginException(['msg'=>'请重新登陆']);
             }
-            if ($user['user_status'] != 1){
+            if ($user['status'] == 1){
                 session(null);
                 throw new LoginException(['msg'=>'账号已禁用，请联系管理员']);
             }

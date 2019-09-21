@@ -51,7 +51,7 @@ class Pay{
             $order = [
                 'orderId' => $this->order->order_no.$rand,// //商户订单号
                 'txnAmt' => $this->order->order_amount_total,// 金额 分
-                'riskRateInfo' => '汽车' // 商品名称
+                'riskRateInfo' => '测试商品名称' // 商品名称
             ];
             $html = (new AcpPay())->index($order);
             return ['html' => $html];
@@ -94,7 +94,7 @@ class Pay{
         if ($order->store_id != $this->userInfo->store_id){
             throw new OrderException(['msg' => '订单与用户不匹配']);
         }
-        if ($this->userInfo->user_status != 1){
+        if ($this->userInfo->status != 1){
             throw new OrderException(['msg' => '门店负责人才能支付']);
         }
         if ($order->order_status != OrderStatus::UNPAID){
