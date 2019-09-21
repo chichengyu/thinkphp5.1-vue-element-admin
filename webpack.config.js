@@ -16,7 +16,7 @@ const argv = require('minimist')(process.argv.slice(2));
 const htmlTitle = '车亿百后台系统';
 const iconPath = 'src/assets/icon/favicon.ico';
 const fontPath = '/static/admin/css/font-awesome.min.css';// 字体文件路径
-const commonPath = '/static/admin/common/common.js';// 公共函数文件路径
+const functionPath = '/static/admin/common/function.js';// 公共函数文件路径
 const envPath = '/static/admin/common/env.js';// 公共变量文件路径
 const m = 'admin';
 
@@ -39,7 +39,7 @@ const plugins = [
         },
         inject:true,
         fontPath:fontPath,
-        common:commonPath,
+        common:functionPath,
         env:envPath
     }),
     new webpack.ProgressPlugin(),
@@ -56,7 +56,7 @@ const plugins = [
         ignore: ['.css'] // 忽略规则。（这种写法表示将该文件夹下的所有文件都复制）
     }]),
     new CopyWebpackPlugin([{// 公共函数文件
-        from: resolve('src/common/common.js'), // 不打包直接输出的文件
+        from: resolve('src/common/function.js'), // 不打包直接输出的文件
         to: resolve(m + '/common'), // 打包后静态文件放置位置
     }]),
     new CopyWebpackPlugin([{// 公共变量文件
