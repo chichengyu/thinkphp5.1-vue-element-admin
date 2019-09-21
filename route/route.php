@@ -103,7 +103,7 @@ Route::group('api/:version',function(){
 
 
 Route::post('/upload/del','api/BaseController/delUpload');// 删除上传图片
-Route::post('/upload/:image','api/BaseController/upload');// 资讯上传
+Route::post('/upload/:image','api/BaseController/upload');// 图片上传
 
 
 
