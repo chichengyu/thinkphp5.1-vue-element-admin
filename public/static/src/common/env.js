@@ -4,7 +4,7 @@ const timeout = 1000;// 页面跳转时间
 const pageOffset = 10;// 每页显示的条数
 
 
-const ip = 'http://el.test';
+const ip = 'http://zn.cn';
 // const ip = 'http://192.168.5.100:8001';
 
 
@@ -15,3 +15,4 @@ const delUploadImageUrl = ip + '/upload/del';// 删除已上传图片地址
 const upload = ip + '/upload/';
 
 const uploadMessageUrl = upload + '456';// 图片上传地址,456 是目录，可自定义
+const uploadExcelUrl = upload + 'excel';// excel

@@ -9,13 +9,15 @@ class BaseController extends Controller{
     use ResponseJson;
 
     /**
-     *  上传图片
+     *  上传图片或文件
      */
     public function upload(Request $request,$image)
     {
         if ($request->isPost()){
             $file = $request->file('file');
-            $res = $this->imageUpload($file,$image);
+            $ext = 'jpg,png,gif';
+            !$file->checkExt($ext)&&($ext = 'xlsx');
+            $res = $this->imageUpload($file,$image,$ext);
             return json($res);
         }
     }
@@ -42,15 +44,15 @@ class BaseController extends Controller{
      * @param $dirPath  保存路径
      * @return array
      */
-    protected function imageUpload($file,$dirPath){
+    protected function imageUpload($file,$dirPath,$ext='jpg,png,gif',$size=1024*1024*2){
         $path = $_SERVER['DOCUMENT_ROOT'].'/';
         $subPath = 'static/uploads/'.$dirPath.'/'.date('Y-m');
         is_dir($path.$subPath) || mkdir($path.$subPath,0777,true);
-        $info = $file->validate(['size'=>1024*1024*2,'ext'=>'jpg,png,gif'])->rule('uniqid')->move($path.$subPath);
+        $info = $file->validate(['size'=>$size,'ext'=>$ext])->rule('uniqid')->move($path.$subPath);
         if ($info){
             return ['code' => 1,'msg' => '上传成功','path'=>'/'.$subPath.'/'.$info->getFilename(),'ivew_path' => httpHost().$_SERVER['HTTP_HOST'].'/'.$subPath.'/'.$info->getFilename()];
         }
-        return ['code' => 0,'msg' =>'上传失败' . $file->getError()];
+        return ['code' => 0,'msg' =>'上传失败：' . $file->getError()];
     }
 
     /** 删除图片

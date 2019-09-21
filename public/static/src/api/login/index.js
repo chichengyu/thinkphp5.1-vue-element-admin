@@ -10,7 +10,7 @@ export const login = (data) => {
 }
 
 /******************* 退出登陆 *******************/
-export const logout= () => {
+export const logout = () => {
 	return axios.request({
 		url:'/logout',
 		method:'get',

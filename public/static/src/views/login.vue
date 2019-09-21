@@ -2,7 +2,7 @@
 	<div class="login">
 		<div class="mask">
 			<div class="login-container">
-				<h2 class="title">车亿百管理系统</h2>
+				<h2 class="title">棕牛管理系统</h2>
 				<div class="login-form">
 					<el-form ref="formInline" :label-position="'right'" :model="formInline">
 						<el-form-item label="">
@@ -54,7 +54,7 @@ export default {
 				rules: [],
 				token: "9ee7bSOKJchJxFqC5/gx/6JTXgOWpfQlpYvzyhjz3Ib1I3Mom9xs3GBjwuNtkqMV/sOskfJKI2ZvOwPmmI702IPl0paT"
 			};
-
+			
 			this.$ls.set('userInfo',userInfo);
 			this.$store.dispatch('setUserInfo',userInfo);
 			this.success('登陆成功！');
@@ -65,12 +65,12 @@ export default {
             var username = this.formInline.username,
                	password = md5(this.formInline.password);
             if(!username){
-        		this.$message.error('请输入账号!');
+        		this.error('请输入账号!');
 				this.$progress.done();
             	return;
         	}
         	if (!password) {
-        		this.$message.error('请输入密码!');
+        		this.error('请输入密码!');
 				this.$progress.done();
             	return;
         	}
@@ -81,10 +81,10 @@ export default {
 						if (res.code == 1) {
 							this.$ls.set(userInfo,res.data);
 							this.$store.dispatch('setUserInfo',res.data);
-							this.$message.success(res.msg);
+							this.success(res.msg);
 							this.$router.push('/home');
 		        		}else {
-							this.$message.error(res.msg);
+							this.error(res.msg);
 						}
 						this.$progress.done();
 					});

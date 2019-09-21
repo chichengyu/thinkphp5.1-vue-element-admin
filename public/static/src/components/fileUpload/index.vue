@@ -2,10 +2,9 @@
     <div class="upload">
         <el-upload :name="name" class="avatar-uploader"
             :action="action"
+            :show-file-list="showFileList"
             :disabled="disabled"
-            :list-type="listType"
             :auto-upload="autoUpload"
-            :multiple="multiple"
             :accept="accept"
             :headers="headers"
             :file-list="fileImageList"
@@ -13,22 +12,8 @@
             :before-upload="handleBefore"
             :on-success="handleSuccess"
             :on-error="handleError">
-            <i slot="default" class="el-icon-plus avatar-uploader-icon"></i>
-            <div slot="file" slot-scope="{file}">
-                <img class="el-upload-list__item-thumbnail" :src="file.url" width="100%" height="100%">
-                <span class="el-upload-list__item-actions" style="font-size: unset">
-                    <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
-                        <i class="el-icon-zoom-in"></i>
-                    </span>
-                    <span class="el-upload-list__item-delete" style="margin-left: 6px" @click="handleRemove(file)">
-                        <i class="el-icon-delete"></i>
-                    </span>
-                </span>
-            </div>
+            <el-button size="small" type="primary"><i class="el-icon-upload"></i> {{ title }}</el-button>
         </el-upload>
-        <el-dialog title="预览" :visible.sync="visible">
-            <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog>
     </div>
 </template>
 
@@ -48,31 +33,29 @@ export default {
             type:String,
             requred:true
         },
-        listType:{// 文件列表的类型 text/picture/picture-card 默认 text
-            type:String,
-            default:'picture-card'
-        },
-        multiple:{// 是否支持多上传
-            type:Boolean,
-            default:false
-        },
         accept:{// 支持的图片格式
             type:String,
-            default:'.jpg,.jpeg,.png'
+            default:'.xlsx'
         },
         params:{// 上传时附带的额外参数
             type:Object,
             default:() => {}
         },
-        previewImages:[String,Array],// 这个fileList是自己定义的一个文件列表，显示的文件就是这个里边的文件
         autoUpload:{// 是否在选取文件后立即进行上传
             type:Boolean,
             default:true
-        }
+        },
+        showFileList:{
+            type:Boolean,
+            default:false
+        },
+        title:{// 支持的图片格式
+            type:String,
+            default:'上传'
+        },
     },
     data() {
         return {
-            dialogImageUrl: '',
             visible: false,
             headers:{token:this.$store.getters.userInfo.token||'1231321'},
             // fileList:[
@@ -81,25 +64,8 @@ export default {
             fileImageList:[]
         };
     },
-    watch:{
-        previewImages:{
-            immediate:true,
-            handler(val){
-                let type = typeof val;
-                if (type == 'string'){
-                    this.fileImageList = [{name:'01',url:val}];
-                }else if (type == 'object'){
-                    let arr = [];
-                    for (let key in val) {
-                        arr.push({name:key,url:val[key]});
-                    }
-                    this.fileImageList = arr;
-                }
-            }
-        },
-    },
     methods: {
-        handleRemove(file) {
+        /*handleRemove(file) {
             if (file.response && file.response.path) {
                 this.axios.request({
                     url:delUploadImageUrl,
@@ -117,11 +83,7 @@ export default {
                    return Promise.reject('删除失败！',err);
                 });
             }
-        },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.visible = true;
-        },
+        },*/
         handleBefore(file){
             this.$emit('before',file);
         },
@@ -142,25 +104,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.upload >>> .el-upload-list--picture-card .el-upload-list__item{
-    width: 58px;
-    height: 58px;
-}
-.upload >>> .el-upload-list--picture-card .el-upload-list__item > div{
-    width: 100%;
-    height: 100%;
-}
-.upload >>> .el-upload.el-upload--picture-card{
-    width: 58px;
-    height: 58px;
-    line-height: 58px;
-}
-.avatar-uploader-icon{
-    width: 100%;
-    height: 100%;
-}
-.el-upload-list__item-thumbnail{
-    width: 100% !important;
-    height: 100% !important;
-}
+
 </style>
