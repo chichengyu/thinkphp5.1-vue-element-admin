@@ -12,18 +12,36 @@ use unionpay\sdk\SDKConfig;
 
 class AcpPay{
     protected $config = [
-            'encoding' => 'utf-8',				  //编码方式
-            'txnType' => '01',				      //交易类型
-            'txnSubType' => '01',				  //交易子类
-            'bizType' => '000201',				  //业务类型
-            'channelType' => '08',	              //渠道类型，07-PC，08-手机
-            'accessType' => '0',		          //接入类型
-            'currencyCode' => '156',	          //交易币种，境内商户固定156
-            'merId' => '777290058171411',		//商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
+        'encoding' => 'utf-8',				  //编码方式
+        'txnType' => '01',				      //交易类型
+        'txnSubType' => '01',				  //交易子类
+        'bizType' => '000201',				  //业务类型
+        'channelType' => '08',	              //渠道类型，07-PC，08-手机
+        'accessType' => '0',		          //接入类型
+        'currencyCode' => '156',	          //交易币种，境内商户固定156
+        'merId' => '898440355210420',		//商户代码，请改自己的测试商户号，此处默认取demo演示页面传递的参数
     ];
 
+    private function init(){
+        // 外网域名
+        $host = 'http://store.cybcar.cn';
+        // 后台通知地址，填写接收银联后台通知的地址，必须外网能访问
+        SDKConfig::getSDKConfig()->backUrl = $host.'/api/v1/UnionBackReceive';
+        // 前台通知地址，填写处理银联前台通知的地址，必须外网能访问
+        SDKConfig::getSDKConfig()->frontUrl = $host.'/api/v1/UnionFrontReceive';
+        // 动态设置证书路径
+        $path = dirname(__FILE__);
+        SDKConfig::getSDKConfig()->signCertPath = $path.'/cert/acp/acp_prod_sign.pfx';
+        SDKConfig::getSDKConfig()->encryptCertPath = $path.'/cert/acp/acp_prod_enc.cer';
+        SDKConfig::getSDKConfig()->rootCertPath = $path.'/cert/acp/acp_prod_root.cer';
+        SDKConfig::getSDKConfig()->middleCertPath = $path.'/cert/acp/acp_prod_middle.cer';
+        SDKConfig::getSDKConfig()->logFilePath = $_SERVER['DOCUMENT_ROOT'].'/logs';
+
+    }
 
     public function index($order){
+        $this->init();
+        // 参数配置
         $this->config['version'] = SDKConfig::getSDKConfig()->version;//版本号
         $this->config['frontUrl'] = SDKConfig::getSDKConfig()->frontUrl;//前台通知地址
         $this->config['backUrl'] = SDKConfig::getSDKConfig()->backUrl;//后台通知地址
@@ -32,9 +50,10 @@ class AcpPay{
         $this->config['payTimeout'] = date('YmdHis', strtotime('+15 minutes'));// 超时时间
         $this->config['riskRateInfo'] = '{commodityName='.$order['riskRateInfo'].'}';// 商品名称
         $this->config = array_merge($this->config,$order);
+
         AcpService::sign ( $this->config );
-        $uri = SDKConfig::getSDKConfig()->frontTransUrl;
-        $html_form = AcpService::createAutoFormHtml( $this->config, $uri );
+        $url = SDKConfig::getSDKConfig()->frontTransUrl;
+        $html_form = AcpService::createAutoFormHtml( $this->config, $url );
         return $html_form;
     }
 
@@ -44,6 +63,7 @@ class AcpPay{
     public function notify(){
         $data = input('post.');
         try{
+            $this->init();
             $res = AcpService::validate($data);
             if($res==1){
                 if($data['respCode']==00){
@@ -57,11 +77,9 @@ class AcpPay{
                     );
                 }
             }
-            file_put_contents(time().'.log',$data);
         }catch (\Exception $e){
-
+            //file_put_contents('err.log',$e->getMessage());
         }
-//        echo json(['http' => '200','code' => '200','msg' => 'ok']);exit();
         return true;
     }
 
@@ -72,6 +90,7 @@ class AcpPay{
     {
         $data = input('post.');
         try{
+            $this->init();
             $res = AcpService::validate($data);
             if($res==1){
                 $resFind = $this->findOrder($data['orderId'],$data['txnTime']);
@@ -89,6 +108,7 @@ class AcpPay{
      * @param $result
      */
     public function findOrder($orderId,$txnTime){
+        $this->init();
         $params = array(
             'version' => SDKConfig::getSDKConfig()->version,		  //版本号
             'encoding' => 'utf-8',		  //编码方式
@@ -100,7 +120,7 @@ class AcpPay{
             'channelType' => '07',		  //渠道类型
 
             'orderId' => $orderId,
-            'merId' => '777290058171411',
+            'merId' => '898440355210420',
             'txnTime' => $txnTime,
         );
 

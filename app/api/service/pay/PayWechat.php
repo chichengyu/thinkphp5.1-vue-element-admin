@@ -15,7 +15,7 @@ class PayWechat{
         'app_id' => 'wx9d9304cfb8c3dcbb',
         'mch_id' => '1522855121',
         'key' => 'e5e64ada5521f8024612d4cff456805b',
-        'notify_url' => 'http://ux3c7c.natappfree.cc/api/v1/notify',
+        'notify_url' => 'http://store.cybcar.cn/api/v1/notify',
         'log' => [
             'file' => './static/paylog/wechat.log',
             'level' => 'info',

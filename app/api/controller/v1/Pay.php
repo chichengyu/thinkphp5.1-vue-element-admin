@@ -59,9 +59,9 @@ class Pay extends Base{
     public function receiveNotifyAcpTest(){
         $res = (new AcpPay())->frontReceive();
         if($res==true){
-            header('Location:http://i55ati.natappfree.cc/#/car/index');
+            header('Location:http://store.cybcar.cn/#/car/index');
         }else{
-            file_put_contents(time().'.log',123);
+//            file_put_contents(time().'.log',123);
         }
 
     }
