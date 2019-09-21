@@ -99,20 +99,11 @@ Route::group('api/:version',function(){
     Route::get('my/user','api/:version.StorePersonnel/getUserinfo');
     Route::post('my/edit','api/:version.StorePersonnel/myEdit');
 
-
-    Route::post('/advert/upload','api/:version.Index/upload');// 广告图片上传
-    Route::post('/brand/upload','api/:version.CarBrand/upload');// 品牌logo上传
-    Route::post('/store/images','api/:version.Store/upload');// 门店海报、logo上传
-    Route::post('/store/license','api/:version.Store/license');// 门店营业执照上传
-    Route::post('/car/upload','api/:version.CarDetails/upload');// 车辆图片上传
-    Route::post('/message/upload','api/:version.Message/upload');// 资讯上传
-
-    Route::post('/upload/del','api/:version.Index/delUpload');// 删除上传图片
 });
 
 
-
-
+Route::post('/upload/del','api/BaseController/delUpload');// 删除上传图片
+Route::post('/upload/:image','api/BaseController/upload');// 资讯上传
 
 
 
