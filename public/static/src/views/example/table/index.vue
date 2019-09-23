@@ -53,29 +53,29 @@ export default {
     },
     created(){
         // this.tableData.map(item => item.visible=false);
-        this.tableData.tableLabel = this.labelInit();
-        this.tableData.tableData = this.tableDataInit(this.tableData.page.currentPage,pageOffset);
-        this.tableData.page.total = this.tableData.tableData.length;
+        this.labelInit();
+        this.tableDataInit(this.tableData.page.currentPage,pageOffset);
     },
     methods: {
         // 列初始化
         labelInit(){
-            return [{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
-                    {prop:'name',title:'名称',width:100},
-                    {prop:'date',title:'日期',minWidth:150,render:(params) => {
-                        // console.log(params);
-                        return '日期：' + params.row.date;
-                    }},
-                    {prop:'province',title:'省份'},
-                    {prop:'city',title:'城市'},
-                    {prop:'address',title:'地址',tooltip:true,width:150},
-                    {prop:'zip',title:'邮编',sort:'custom'},
-                    {prop:'status',title:'状态',isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}];
+            let label = [{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
+                {prop:'name',title:'名称',width:100},
+                {prop:'date',title:'日期',minWidth:150,render:(params) => {
+                    // console.log(params);
+                    return '日期：' + params.row.date;
+                }},
+                {prop:'province',title:'省份'},
+                {prop:'city',title:'城市'},
+                {prop:'address',title:'地址',tooltip:true,width:150},
+                {prop:'zip',title:'邮编',sort:'custom'},
+                {prop:'status',title:'状态',isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}];
+            this.tableData.tableLabel = label;
         },
         // 数据初始化
-        tableDataInit(){
+        tableDataInit(currentPage,pageOffset,keywords=''){
             /*this.tableData.loading = true;
-            getTableData(page,pageOffset,keywords).then(res => {
+            getTableData(currentPage,pageOffset,keywords).then(res => {
                 if (res.data.code == 1){
                     this.tableData.tableData = res.data.data.data.data;
                     this.tableData.page.total = res.data.data.total;
@@ -84,11 +84,12 @@ export default {
                 }
                 this.tableData.loading = false;
             });*/
-            return [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,},
+            let data = [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,},
                 {id:2, date: '2016-05-04', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1517 弄', zip: 200333, status:1,},
                 {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,},
                 {id:4, date: '2016-05-03', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1516 弄', zip: 200333, status:0},
-                {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,}]
+                {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,}];
+            this.tableData.tableData = data;
         },
     },
 }
