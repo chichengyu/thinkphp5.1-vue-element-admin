@@ -37,7 +37,13 @@ export default {
                     ]
                 },
                 // 分页
-                page:{align:'right'},
+                page:{align:'right',total:1,currentPage:1,currentChange:(currentPage) => {
+                    console.log('当前页',currentPage);
+                    this.tableData.loading = true;
+                    setTimeout(() => {
+                        this.tableData.loading = false;
+                    },1500)
+                }},
                 // 排序
                 sortChange(obj) {
                     console.log(obj);
@@ -48,8 +54,8 @@ export default {
     created(){
         // this.tableData.map(item => item.visible=false);
         this.tableData.tableLabel = this.labelInit();
-        this.tableData.tableData = this.tableDataInit();
-        this.handlePage();
+        this.tableData.tableData = this.tableDataInit(this.tableData.page.currentPage,pageOffset);
+        this.tableData.page.total = this.tableData.tableData.length;
     },
     methods: {
         // 列初始化
@@ -68,24 +74,22 @@ export default {
         },
         // 数据初始化
         tableDataInit(){
+            /*this.tableData.loading = true;
+            getTableData(page,pageOffset,keywords).then(res => {
+                if (res.data.code == 1){
+                    this.tableData.tableData = res.data.data.data.data;
+                    this.tableData.page.total = res.data.data.total;
+                }else {
+                    jumpUrl(res.data,this);
+                }
+                this.tableData.loading = false;
+            });*/
             return [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,},
                 {id:2, date: '2016-05-04', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1517 弄', zip: 200333, status:1,},
                 {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,},
                 {id:4, date: '2016-05-03', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1516 弄', zip: 200333, status:0},
                 {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,}]
         },
-        // 分页初始化处理
-        handlePage(){
-            // this.tableData.page.total = 60;
-            this.tableData.page.total = this.tableData.tableData.length;
-            this.tableData.page.currentChange = (currentPage) => {
-                console.log('当前页',currentPage);
-                this.tableData.loading = true;
-                setTimeout(() => {
-                    this.tableData.loading = false;
-                },1500)
-            }
-        }
     },
 }
 </script>
