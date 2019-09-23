@@ -59,7 +59,7 @@ export default {
     methods: {
         // 列初始化
         labelInit(){
-            let label = [{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
+            this.tableData.tableLabel = [{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
                 {prop:'name',title:'名称',width:100},
                 {prop:'date',title:'日期',minWidth:150,render:(params) => {
                     // console.log(params);
@@ -69,8 +69,8 @@ export default {
                 {prop:'city',title:'城市'},
                 {prop:'address',title:'地址',tooltip:true,width:150},
                 {prop:'zip',title:'邮编',sort:'custom'},
-                {prop:'status',title:'状态',isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}];
-            this.tableData.tableLabel = label;
+                {prop:'status',title:'状态',isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}
+            ];
         },
         // 数据初始化
         tableDataInit(currentPage,pageOffset,keywords=''){
