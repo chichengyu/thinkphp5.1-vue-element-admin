@@ -12,7 +12,7 @@
             :before-upload="handleBefore"
             :on-success="handleSuccess"
             :on-error="handleError">
-            <el-button :size="size" type="primary"><i class="el-icon-upload"></i> {{ title }}</el-button>
+            <el-button :size="size" type="primary">{{ title }}</el-button>
         </el-upload>
     </div>
 </template>
