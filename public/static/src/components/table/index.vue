@@ -3,6 +3,8 @@
         <el-table style="width: 100%"
             border
             v-loading="data.loading"
+            :element-loading-text="data.loadingText||'Loading'"
+            :element-loading-spinner="data.loadingIcon||'el-icon-loading'"
             :empty-text="data.table_msg_empty"
             :data="data.tableData"
             :default-sort="data.defaultSort"
