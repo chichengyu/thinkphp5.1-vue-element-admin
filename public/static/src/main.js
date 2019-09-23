@@ -7,10 +7,10 @@ import Vue from 'vue'
 import store from './store/index.js'
 import App from './App.vue'
 import router from './router/router.js'
-import directives from './directtives'
+import directives from './directives'
 import utils from './lib/utils'
 
-// https://www.thinkcmf.com/font/font_awesome/icons.html
+// import 'font-awesome/css/font-awesome.min.css' // https://www.thinkcmf.com/font/font_awesome/icons.html
 import 'normalize.css'
 import './assets/style/globalstyle.css'
 
