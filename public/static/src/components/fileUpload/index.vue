@@ -1,5 +1,5 @@
 <template>
-    <div class="upload">
+    <div class="file-upload">
         <el-upload :name="name" class="avatar-uploader"
             :action="action"
             :show-file-list="showFileList"
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    name: "Upload",
+    name: "File-upload",
     props:{
         name:{
             type:String,
