@@ -59,7 +59,8 @@ export default {
     methods: {
         // 列初始化
         labelInit(){
-            this.tableData.tableLabel = [{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
+            this.tableData.tableLabel = [
+                {prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
                 {prop:'name',title:'名称',width:100},
                 {prop:'date',title:'日期',minWidth:150,render:(params) => {
                     // console.log(params);
