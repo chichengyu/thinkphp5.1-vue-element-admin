@@ -37,7 +37,7 @@
             </el-form-item>
             <!-- 按钮操作 -->
             <el-form-item v-if="form.buttons.options" :align="form.buttons.align||'left'">
-                <el-button v-for="(item,key) in form.buttons.options" :type="item.type" :size="item.size" :key="key" :disabled="item.disabled" @click="item.method && item.method()">{{ item.title }}</el-button>
+                <el-button v-for="(item,key) in form.buttons.options" :type="item.type" :size="item.size" :key="key" :disabled="item.disabled" @click="item.method && item.method($refs['form'])">{{ item.title }}</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -56,24 +56,6 @@ export default {
             required:true
         }
     },
-    data() {
-        return {};
-    },
-    methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
-        },
-        resetForm(formName) {
-            this.$refs[formName].resetFields();
-        }
-    }
 }
 </script>
 

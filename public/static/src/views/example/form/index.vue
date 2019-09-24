@@ -64,8 +64,19 @@ export default {
                 buttons:{
                     align:'left',
                     options:[
-                        {title:'提交',type:'primary',method:() => {console.log('提交')}},
-                        {title:'重置',method:() => {console.log('重置')}},
+                        {title:'提交',type:'primary',method:(form) => {
+                            form.validate(valid => {
+                                if (valid){
+                                    console.log('提交');
+                                }else{
+                                    console.log('验证不通过');
+                                }
+                            });
+                        }},
+                        {title:'重置',method:(form) => {
+                            console.log('重置');
+                            form.resetFields();
+                        }},
                     ]
                 },
                 rules: {
