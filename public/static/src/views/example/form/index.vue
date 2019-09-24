@@ -33,7 +33,7 @@ export default {
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
                     {prop: 'password', title: '密码', type: 'input',password:true},
                     {prop: 'text', title: '文本域', type: 'textarea',placeholder: '我是自定义内容'},
-                    {prop: 'select', title: '下拉选择',type: 'select',options:[
+                    {prop: 'select', title: '下拉选择',type: 'select',key:'label',value:'value',options:[
                         {label:'北京',value:1},
                         {label:'上海',value:2},
                         {label:'重庆',value:3}],
