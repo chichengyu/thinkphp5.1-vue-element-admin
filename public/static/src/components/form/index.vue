@@ -1,7 +1,7 @@
 <template>
     <div class="form" :style="'width:'+width+'%;padding: 32px 32px 32px 0;background:#fff;'">
-        <el-form ref="form" :model="form.formFields" :rules="form.rules" label-width="100px" class="demo-ruleForm">
-            <el-form-item v-for="(item,index) in form.formLable" :key="index" :label="item.title" :prop="item.prop">
+        <el-form ref="form" :model="form.formFields" :rules="form.rules" :label-width="form.formLabelWidth||'100px'" class="demo-ruleForm">
+            <el-form-item v-for="(item,index) in form.formLable" :key="index" :label="item.title" :prop="item.prop" :label-width="form.formItemLabelWidth||''">
                 <!-- 输入框 -->
                 <el-input v-if="item.type==='input'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :show-password="item.password" :size="item.size" :disabled="item.disabled" :style="{width:item.width+'px'}" :placeholder="item.placeholder"></el-input>
                 <!-- 数字输入框 -->
@@ -36,8 +36,8 @@
                 <el-switch v-if="item.type==='switch'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :disabled="item.disabled" :active-value="item.activeValue" :inactive-value="item.inactiveValue" active-color="#52BEA6" inactive-color="#ff4949" :active-text="item.activeText||''" :inactive-text="item.inactiveText||''"></el-switch>
             </el-form-item>
             <!-- 按钮操作 -->
-            <el-form-item v-if="form.buttons">
-                <el-button v-for="(item,key) in form.buttons" :type="item.type" :size="item.size" :key="key" :disabled="item.disabled" @click="item.method && item.method()">{{ item.title }}</el-button>
+            <el-form-item v-if="form.buttons.options" :align="form.buttons.align||'left'">
+                <el-button v-for="(item,key) in form.buttons.options" :type="item.type" :size="item.size" :key="key" :disabled="item.disabled" @click="item.method && item.method()">{{ item.title }}</el-button>
             </el-form-item>
         </el-form>
     </div>

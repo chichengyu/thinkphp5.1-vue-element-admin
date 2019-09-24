@@ -14,6 +14,8 @@ export default {
     data () {
         return {
             form:{
+                formLabelWidth:'300px',
+                formItemLabelWidth:'200px',
                 formFields:{
                     name: '',
                     number:1,
@@ -59,10 +61,13 @@ export default {
                     {prop: 'dateti', title: '日期时间', type: 'datetimerange', change:(val) => {console.log(val)}},
                     {prop: 'switch', title: 'switch开关', type: 'switch',change:(val) => {console.log(val)}},
                 ],
-                buttons:[
-                    {title:'提交',type:'primary',method:() => {console.log('提交')}},
-                    {title:'重置',method:() => {console.log('重置')}},
-                ],
+                buttons:{
+                    align:'left',
+                    options:[
+                        {title:'提交',type:'primary',method:() => {console.log('提交')}},
+                        {title:'重置',method:() => {console.log('重置')}},
+                    ]
+                },
                 rules: {
                     name: [
                         { required: true, message: '请输入活动名称', trigger: 'blur' },
