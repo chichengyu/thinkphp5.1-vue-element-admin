@@ -1,7 +1,7 @@
 <template>
     <el-dialog
         :title="title"
-        :visible.sync="visible"
+        :visible.sync="$attrs.visible"
         :width="width+'%'"
         :close-on-click-modal="close"
         :before-close="handleClose"
@@ -34,32 +34,14 @@ export default {
             default: false
         }
     },
-    data() {
-        return {};
-    },
-    created(){
-        // this.$parent.hasOwnProperty('handleClose') && (this.$parent.handleClose=()=>{});
-    },
-    computed:{
-        visible:{
-            get(){
-                return this.$attrs.visible;
-            },
-            set(val){}
-        }
-    },
     methods: {
         handleClose(done) {
             this.$emit('update:visible',false);
             done();
         },
         handleDialog(key){
-            if (this.$parent.hasOwnProperty(key)){
-                this.$emit('update:visible',false);
-                this.$parent[key]();
-            }else {
-                this.$emit('update:visible',false);
-            }
+            this.$parent.hasOwnProperty(key) && this.$parent[key]();
+            this.$emit('update:visible',false);
         }
     }
 };
