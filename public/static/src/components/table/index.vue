@@ -8,7 +8,7 @@
             :empty-text="data.table_msg_empty"
             :data="data.tableData"
             :default-sort="data.defaultSort"
-            @sort-change="data.sortChange">
+            @sort-change="handleSort">
             <!-- 列 -->
             <el-table-column v-for="(col,key) in data.tableLabel"
                 :key="key"
@@ -33,7 +33,7 @@
                         @change="col.isSwitch.change && col.isSwitch.change(scope)">
                     </el-switch>
                     <!-- tree树形 -->
-                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" style="margin-left:-1.3em;cursor: pointer;">
+                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="{marginLeft:(scope.row.grade-1.3)+'em',cursor:'pointer'}">
                         <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
                         <i class="el-icon-arrow-right" v-else></i>
                         <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
@@ -44,7 +44,11 @@
                             <div style="width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
                         </el-tooltip>
                     </div>
-                    <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+<!--                    <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
+                    <div v-else>
+                        <div v-if="scope.row.grade>0&&col.hasChildren" :style="{marginLeft:(scope.row.grade-1.3)+'em'}">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                        <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                    </div>
                 </template>
             </el-table-column>
             <!-- 操作 -->
@@ -92,13 +96,17 @@ export default {
             default:() => {}
         }
     },
-    data() {
-        return {}
+    data() {return {count:0}},
+    watch:{
+        data:{
+            immediate:true,
+            deep:true,
+            handler(val){(this.count === 1) && util.treeTableXcode(val.tableData);}
+        }
     },
     created(){
         util.treeTableXcode(this.data.tableData);
-        !this.data.hasOwnProperty('sortChange') && (this.data.sortChange=(params)=>{});
-        // this.data.page.currentPage?this.data.page.currentPage:1;
+        this.count = 1;
     },
     methods: {
         // popover 框  / 确定删除
@@ -125,10 +133,11 @@ export default {
             if(!item.children){
                 return index;
             }
-            this.data.tableData.some((item,index) => {
+            !item.grade && this.data.tableData.some((item,index) => {
                 if (item.xcode.includes('-')) {
                     index = item.xcode.substr(0,1);
                     this.collapse(this.data.tableData[index],index);
+                    return true;
                 }
             });
             //展开
@@ -147,20 +156,38 @@ export default {
             if(!item.children)return index;
             //收缩
             item.open = false;
-            this.data.tableData.splice(Number(index)+1,item.children.length);
+            // this.data.tableData.splice(Number(index)+1,item.children.length);
+            this.data.tableData.splice(Number(index)+1,util.size(item.children));
         },
+        // 排序
+        handleSort(params){this.data.sortChange && this.data.sortChange(params);}
     },
 }
 var util = {};
-util.treeTableXcode = function(data,xcode){
+util.treeTableXcode = function(data,xcode,grade){
     xcode = xcode || "";
+    grade = grade || 0;
     for(var i=0;i<data.length;i++){
         var item = data[i];
-        item.xcode = xcode + i;
-        if(item.children && item.children.length > 0){
-            util.treeTableXcode(item.children,item.xcode+"-");
+        if (item.xcode && !item.xcode.includes('-')){
+            break;
+        }else{
+            item.xcode = xcode + i;
+            item.grade = grade;
+            if(item.children && item.children.length > 0){
+                util.treeTableXcode(item.children,item.xcode+"-",grade+1);
+            }
         }
     }
+};
+util.size = function (data) {
+    let len = data.length || 0;
+    for(var i=0;i<data.length;i++){
+        if (data[i].children){
+            len += util.size(data[i].children)
+        }
+    }
+    return len;
 }
 </script>
 
