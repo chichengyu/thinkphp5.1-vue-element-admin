@@ -33,7 +33,7 @@
                         @change="col.isSwitch.change && col.isSwitch.change(scope)">
                     </el-switch>
                     <!-- tree树形 -->
-                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="{marginLeft:(scope.row.grade-1.3)+'em',cursor:'pointer'}">
+                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="{marginLeft:(scope.row.grade-0.3)+'em',cursor:'pointer'}">
                         <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
                         <i class="el-icon-arrow-right" v-else></i>
                         <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
@@ -46,7 +46,8 @@
                     </div>
 <!--                    <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
                     <div v-else>
-                        <div v-if="scope.row.grade>0&&col.hasChildren" :style="{marginLeft:(scope.row.grade-1.3)+'em'}">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                        <div v-if="scope.row.grade>0&&col.hasChildren" :style="{marginLeft:(scope.row.grade+0.9)+'em'}">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+<!--                        <div v-else-if="scope.row.grade==0&&col.hasChildren" style="margin-left: 0.9em">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
                         <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
                     </div>
                 </template>
