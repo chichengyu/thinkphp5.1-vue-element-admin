@@ -10,6 +10,7 @@
                 <el-input v-if="item.type==='textarea'" type="textarea" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :rows="item.rows || 2" :disabled="item.disabled" :resize="item.resize||'none'" :style="{width:item.width+'px'}" :placeholder="item.placeholder||'请输入内容'"></el-input>
                 <!-- 下拉框 -->
                 <el-select v-if="item.type==='select'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :size="item.size" :disabled="item.disabled" :style="{width:item.width+'px'}" placeholder="请选择">
+                    <el-option label="请选择" value="0"></el-option>
                     <el-option v-for="(subItem,key) in item.options" v-if="form.formFields[item.value||'value']!=subItem[item.value||'value']" :key="key" :label="subItem[item.key||'label']" :value="subItem[item.value||'value']"></el-option>
                 </el-select>
                 <!-- 单选 -->
