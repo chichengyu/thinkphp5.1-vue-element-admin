@@ -22,6 +22,7 @@ export default {
                     password: '',
                     text: '',
                     select: '',
+                    selectGroup:2,
                     radio: '1',
                     radiosButton: '1',
                     checkbox: ['1','2'],
@@ -33,10 +34,34 @@ export default {
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
                     {prop: 'password', title: '密码', type: 'input',password:true},
                     {prop: 'text', title: '文本域', type: 'textarea',placeholder: '我是自定义内容'},
+                    // {prop: 'select', title: '下拉选择',type: 'select',key:'label',value:'value',options:[
+                    //     {label:'北京',value:1},
+                    //     {label:'上海',value:2},
+                    //     {label:'重庆',value:3}],
+                    //     change:(val) => {console.log(val);}
+                    // },
                     {prop: 'select', title: '下拉选择',type: 'select',key:'label',value:'value',options:[
-                        {label:'北京',value:1},
-                        {label:'上海',value:2},
-                        {label:'重庆',value:3}],
+                            {label:'北京',value:1,level:0},
+                            {label:'上海',value:2,level: 1},
+                            {label:'重庆',value:3}],
+                        change:(val) => {console.log(val);}
+                    },
+                    {prop: 'selectGroup', title: '分级下拉选择',type: 'selectGroup',key:'label',value:'value',right:true,header:'label',children:'children',options:[
+                            {
+                                label:'分组一',
+                                children:[
+                                    {label:'北京',value:1},
+                                    {label:'上海',value:2},
+                                    {label:'重庆',value:3}
+                                ]
+                            }, {
+                                label:'分组二',
+                                children:[
+                                    {label:'成都',value:4},
+                                    {label:'天津',value:5},
+                                    {label:'绵阳',value:6}
+                                ]
+                            }],
                         change:(val) => {console.log(val);}
                     },
                     {prop: 'radio', title: '单选',type: 'radio',options:[

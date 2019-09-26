@@ -61,7 +61,7 @@ export default {
         labelInit(){
             this.tableData.tableLabel = [
                 {prop:'id',title:'ID',type:'index',fixed:true,width:80},
-                {prop:'name',title:'名称',width:100,hasChildren:true,align:'center'},
+                {prop:'name',title:'名称',width:100,hasChildren:true,align:'left'},
                 {prop:'date',title:'日期',render:(params) => {
                     // console.log(params);
                     return '--'+params.row.date;

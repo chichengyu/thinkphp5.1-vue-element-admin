@@ -11,7 +11,20 @@
                 <!-- 下拉框 -->
                 <el-select v-if="item.type==='select'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :size="item.size" :disabled="item.disabled" :style="{width:item.width+'px'}" placeholder="请选择">
                     <el-option label="请选择" value="0"></el-option>
-                    <el-option v-for="(subItem,key) in item.options" v-if="form.formFields[item.value||'value']!=subItem[item.value||'value']" :key="key" :label="subItem[item.key||'label']" :value="subItem[item.value||'value']"></el-option>
+                    <el-option v-for="(subItem,key) in item.options" v-if="form.formFields[item.value||'value']!=subItem[item.value||'value']" :key="key" :label="subItem[item.key||'label']" :value="subItem[item.value||'value']">
+                        <span style="float: left">{{ '└―'.repeat(subItem.level||0) + ' ' + subItem[item.key||'label']}}</span>
+                    </el-option>
+                </el-select>
+                <!-- 分组下拉框 -->
+                <el-select v-if="item.type==='selectGroup'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :size="item.size" :disabled="item.disabled" :style="{width:item.width+'px'}" placeholder="请选择">
+                    <el-option label="请选择" value="0" style="color:#909399;font-size: 13px"></el-option>
+                    <div v-for="(subItem,key) in item.options" :key="key">
+                        <div style="padding:.6em;font-size:12px;color:#909399;user-select:none;cursor:no-drop">{{ subItem[item.header||'label'] }}</div>
+                        <el-option v-if="subItem[item.children||'children']" v-for="(subItemChild,k) in subItem[item.children||'children']" :key="k" :label="subItemChild[item.key||'label']" :value="subItemChild[item.value||'value']" :disabled="form.formFields[item.prop]!=subItemChild[item.value||'value']?false:true">
+                            <span style="float: left">{{ subItemChild[item.key||'label'] }}</span>
+                            <span v-if="item.right" style="float: right; color: #8492a6; font-size: 13px">{{ subItem[item.header||'label'] }}</span>
+                        </el-option>
+                    </div>
                 </el-select>
                 <!-- 单选 -->
                 <el-radio-group v-if="item.type==='radio'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :size="item.size" :disabled="item.disabled">

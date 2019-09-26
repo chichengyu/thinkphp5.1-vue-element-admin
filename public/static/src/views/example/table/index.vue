@@ -46,6 +46,7 @@ export default {
                 }},
                 // 排序
                 sortChange(obj) {
+                    console.log(10);
                     console.log(obj);
                 },
             }
