@@ -1,6 +1,6 @@
 <template>
     <div class="form" style="background:#fff;">
-        <component-form :width="50" :form="form"></component-form>
+        <component-form :width="80" :form="form"></component-form>
     </div>
 </template>
 
@@ -10,10 +10,12 @@ export default {
     data () {
         return {
             form:{
-                formLabelWidth:'300px',
-                formItemLabelWidth:'200px',
+                labelWidth:'200px',
+                inline:true,
+                position:'right',
                 formFields:{
                     name: '',
+                    nameLine:'',
                     number:1,
                     password: '',
                     text: '',
@@ -27,6 +29,7 @@ export default {
                 },
                 formLable:[
                     {prop: 'name', title: '名称', type: 'input',disabled:false,placeholder:'请输入姓名'},
+                    {prop: 'nameLine', title: '同行显示', type: 'input',style:{display:'inline-block',transform:'translateX(27px)'}},
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
                     {prop: 'password', title: '密码', type: 'input',password:true},
                     {prop: 'text', title: '文本域', type: 'textarea',placeholder: '我是自定义内容'},
