@@ -1,7 +1,7 @@
 <template>
     <div class="dialog">
         <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
-        <dialog-custom
+        <component-dialog
            :title="'Dialog弹窗'"
            :width="50"
            :visible.sync="dialogVisible"
@@ -10,17 +10,13 @@
             <div slot="dialog">
                 <span>这是 Dialog 弹窗封装组件</span>
             </div>
-        </dialog-custom>
+        </component-dialog>
     </div>
 </template>
 
 <script>
-import dialogCustom from '@/components/dialog'
 export default {
     name: "Dialog",
-    components:{
-        dialogCustom
-    },
     data () {
         return {
             dialogVisible:false

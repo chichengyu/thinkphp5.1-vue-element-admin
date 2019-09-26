@@ -1,16 +1,12 @@
 <template>
     <div class="form" style="background:#fff;">
-        <form-data :width="50" :form="form"></form-data>
+        <component-form :width="50" :form="form"></component-form>
     </div>
 </template>
 
 <script>
-import formData from '@/components/form'
 export default {
     name: "Form",
-    components:{
-        formData
-    },
     data () {
         return {
             form:{

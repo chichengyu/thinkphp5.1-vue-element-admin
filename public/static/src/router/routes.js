@@ -77,10 +77,10 @@ const routesMap = [
 		]
 	},
 	{
-		path:'/components',
+		path:'/example',
 		component: Layout,
 		meta:{
-			title:'组件',
+			title:'example',
 			icon:'el-icon-s-data',
 		},
 		children:[
@@ -137,6 +137,15 @@ const routesMap = [
 					icon:true,
 				},
 				component: () => import(/* webpackChunkName: "form" */ '@/views/example/form')
+			},
+			{
+				path:'editor',
+				name:'editor',
+				meta:{
+					title:'editor',
+					icon:true,
+				},
+				component: () => import(/* webpackChunkName: "editor" */ '@/views/example/editor')
 			}
 		],
 	},

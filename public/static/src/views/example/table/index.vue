@@ -1,22 +1,15 @@
 <template>
     <div class="table">
-        <table-data :data="tableData"></table-data>
+        <component-table :data="tableData"></component-table>
     </div>
 </template>
 
 <script>
-import TableData from '@/components/table'
-
 export default {
     name:'Table',
-    components:{
-        TableData
-    },
     data() {
         return {
             visible:false,
-            totalPage:100,
-            currentPage:1,
             tableData: {
                 loading:false,
                 // 请求回来的数据

@@ -1,22 +1,15 @@
 <template>
     <div class="table">
-        <table-data :data="tableData"></table-data>
+        <component-table :data="tableData"></component-table>
     </div>
 </template>
 
 <script>
-import TableData from '@/components/table'
-
 export default {
     name:'Table',
-    components:{
-        TableData
-    },
     data() {
         return {
             visible:false,
-            totalPage:100,
-            currentPage:1,
             tableData: {
                 loading:false,
                 // 请求回来的数据
@@ -37,7 +30,7 @@ export default {
                     ]
                 },
                 // 分页
-                page:{align:'right',total:1,currentPage:1,currentChange:(currentPage) => {
+                page:{align:'right',total:50,currentPage:1,currentChange:(currentPage) => {
                     console.log('当前页',currentPage);
                     this.tableData.loading = true;
                     setTimeout(() => {
