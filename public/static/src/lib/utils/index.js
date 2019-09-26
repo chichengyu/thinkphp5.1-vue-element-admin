@@ -17,7 +17,6 @@ export default {
         Vue.prototype.warning = warning;
         Vue.prototype.success = success;
         Vue.prototype.error = error;
-        Vue.prototype.ObjectforIn = this.objForeach;
 
         // 注册全局组件
         Vue.component('ComponentTable',table);
