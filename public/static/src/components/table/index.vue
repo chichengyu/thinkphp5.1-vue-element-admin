@@ -97,7 +97,7 @@ export default {
             default:() => {}
         }
     },
-    data() {return {count:0,lastIndex:null}},
+    data() {return {count:0}},
     watch:{
         data:{
             immediate:true,
