@@ -12,7 +12,7 @@ export default {
             form:{
                 labelWidth:'200px',
                 inline:true,
-                position:'right',
+                labelPosition:'right',
                 formFields:{
                     name: '',
                     nameLine:'',
