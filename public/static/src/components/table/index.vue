@@ -33,7 +33,7 @@
                         @change="col.isSwitch.change && col.isSwitch.change(scope)">
                     </el-switch>
                     <!-- tree树形 -->
-                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="{marginLeft:(scope.row.grade-0.3)+'em',cursor:'pointer'}">
+                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="{marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'}">
                         <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
                         <i class="el-icon-arrow-right" v-else></i>
                         <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
@@ -46,8 +46,8 @@
                     </div>
 <!--                    <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
                     <div v-else>
-                        <div v-if="scope.row.grade>0&&col.hasChildren" :style="{marginLeft:(scope.row.grade+0.9)+'em'}">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
-<!--                        <div v-else-if="scope.row.grade==0&&col.hasChildren" style="margin-left: 0.9em">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
+                        <div v-if="scope.row.xgrade>0&&col.hasChildren" :style="{marginLeft:(scope.row.xgrade+0.6)+'em'}">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+<!--                        <div v-else-if="scope.row.xgrade==0&&col.hasChildren" style="margin-left: 0.9em">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
                         <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
                     </div>
                 </template>
@@ -97,7 +97,7 @@ export default {
             default:() => {}
         }
     },
-    data() {return {count:0}},
+    data() {return {count:0,lastIndex:null}},
     watch:{
         data:{
             immediate:true,
@@ -134,16 +134,17 @@ export default {
             if(!item.children){
                 return index;
             }
-            !item.grade && this.data.tableData.some((item,index) => {
+            /*!item.xgrade && this.data.tableData.some((item,index) => {
                 if (item.xcode.includes('-')) {
                     index = item.xcode.substr(0,1);
                     this.collapse(this.data.tableData[index],index);
                     return true;
                 }
-            });
+            });*/
             //展开
             for(var i=0;item.children && i<item.children.length;i++){
                 var child = item.children[i];
+                // this.data.tableData.splice(++index,0,child);
                 this.data.tableData.splice(++index,0,child);
                 if(child.children && child.children.length > 0 && child.open){
                     index = this.expand(child,index);
@@ -165,18 +166,18 @@ export default {
     },
 }
 var util = {};
-util.treeTableXcode = function(data,xcode,grade){
+util.treeTableXcode = function(data,xcode,xgrade){
     xcode = xcode || "";
-    grade = grade || 0;
+    xgrade = xgrade || 0;
     for(var i=0;i<data.length;i++){
         var item = data[i];
         if (item.xcode && !item.xcode.includes('-')){
             break;
         }else{
             item.xcode = xcode + i;
-            item.grade = grade;
+            item.xgrade = xgrade;
             if(item.children && item.children.length > 0){
-                util.treeTableXcode(item.children,item.xcode+"-",grade+1);
+                util.treeTableXcode(item.children,item.xcode+"-",xgrade+1);
             }
         }
     }

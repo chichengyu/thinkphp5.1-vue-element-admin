@@ -11,7 +11,7 @@
                 <!-- 下拉框 -->
                 <el-select v-if="item.type==='select'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :size="item.size" :disabled="item.disabled" :style="{width:item.width+'px'}" placeholder="请选择">
                     <el-option label="请选择" value="0"></el-option>
-                    <el-option v-for="(subItem,key) in item.options" v-if="form.formFields[item.value||'value']!=subItem[item.value||'value']" :key="key" :label="subItem[item.key||'label']" :value="subItem[item.value||'value']">
+                    <el-option v-for="(subItem,key) in item.options" :key="key" :label="subItem[item.key||'label']" :value="subItem[item.value||'value']" :disabled="form.formFields[item.value||'value']!=subItem[item.value||'value']?false:true">
                         <span style="float: left">{{ '└―'.repeat(subItem.level||0) + ' ' + subItem[item.key||'label']}}</span>
                     </el-option>
                 </el-select>
