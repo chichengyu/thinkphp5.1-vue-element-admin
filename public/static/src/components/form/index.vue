@@ -75,13 +75,13 @@ export default {
         }
     },
     data(){return { form:this.data }},
-    watch:{
-        data:{
-            immediate:true,
-            deep:true,
-            handler(val){ val && (this.form = val)}
-        }
-    },
+    // watch:{
+    //     data:{
+    //         immediate:true,
+    //         deep:true,
+    //         handler(val){ val && (this.form = val)}
+    //     }
+    // },
 }
 </script>
 
