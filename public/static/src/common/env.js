@@ -3,6 +3,8 @@ const userInfo = 'userInfo';// 存个人信息的键名
 const timeout = 1000;// 页面跳转时间
 const pageOffset = 10;// 每页显示的条数
 
+// 系统名称
+const project = '棕牛管理系统';
 
 const ip = 'http://zn.cn';
 // const ip = 'http://192.168.5.100:8001';

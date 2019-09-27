@@ -70,7 +70,7 @@ export default {
     },
     data() {
         return {
-            title:'xxxxxxxxxxx系统',
+            title:project,
             isCollapse:false,
             menuIndex:'0',
             siderBarList:[],
