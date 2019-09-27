@@ -27,6 +27,7 @@ export default {
                     text: '',
                     select: '',
                     selectGroup:2,
+                    cascader:'xiaolv',
                     radio: '1',
                     radiosButton: '1',
                     checkbox: ['1','2'],
@@ -62,6 +63,39 @@ export default {
                                     {label:'绵阳',value:6}
                                 ]
                             }],
+                        change:(val) => {console.log(val);}
+                    },
+                    {prop: 'cascader', title: 'Cascader级选择器',type: 'cascader',props:{label:'name',value:'value',children:'children'},right:true,header:'label', options:[{
+                            value: 'zhinan',
+                            name: '指南',
+                            children: [{
+                                value: 'shejiyuanze',
+                                name: '设计原则',
+                                children: [{
+                                    value: 'yizhi',
+                                    name: '一致'
+                                }, {
+                                    value: 'fankui',
+                                    name: '反馈'
+                                }, {
+                                    value: 'xiaolv',
+                                    name: '效率'
+                                }, {
+                                    value: 'kekong',
+                                    name: '可控'
+                                }]
+                            }, {
+                                value: 'daohang',
+                                name: '导航',
+                                children: [{
+                                    value: 'cexiangdaohang',
+                                    name: '侧向导航'
+                                }, {
+                                    value: 'dingbudaohang',
+                                    name: '顶部导航'
+                                }]
+                            }]
+                        }],
                         change:(val) => {console.log(val);}
                     },
                     {prop: 'radio', title: '单选',type: 'radio',options:[
