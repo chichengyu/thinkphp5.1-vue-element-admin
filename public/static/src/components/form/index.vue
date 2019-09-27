@@ -69,9 +69,17 @@ export default {
             type:Number,
             default:100
         },
-        form:{
+        data:{
             type:Object,
             required:true
+        }
+    },
+    data(){return { form:this.data }},
+    watch:{
+        data:{
+            immediate:true,
+            deep:true,
+            handler(val){ val && (this.form = val)}
         }
     },
 }

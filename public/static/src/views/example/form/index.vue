@@ -1,6 +1,6 @@
 <template>
     <div class="form" style="background:#fff;">
-        <component-form :width="80" :form="form">
+        <component-form :width="80" :data="form">
             <template slot="form">
                 <el-form-item label="扩展表单" prop="extend">
                     <el-input v-model="form.formFields.extend"></el-input>
