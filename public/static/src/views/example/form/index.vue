@@ -1,6 +1,12 @@
 <template>
     <div class="form" style="background:#fff;">
-        <component-form :width="80" :form="form"></component-form>
+        <component-form :width="80" :form="form">
+            <template slot="form">
+                <el-form-item label="扩展表单" prop="extend">
+                    <el-input v-model="form.formFields.extend"></el-input>
+                </el-form-item>
+            </template>
+        </component-form>
     </div>
 </template>
 
@@ -25,7 +31,8 @@ export default {
                     radiosButton: '1',
                     checkbox: ['1','2'],
                     date: '2019-09-07',
-                    switch:true
+                    switch:true,
+                    extend:'扩展表单',
                 },
                 formLable:[
                     {prop: 'name', title: '名称', type: 'input',disabled:false,prefixIcon:'el-icon-user',placeholder:'请输入姓名'},
@@ -119,6 +126,10 @@ export default {
                     ],
                     radiosButton: [
                         { required: true, message: '请填写活动形式', trigger: 'blur' }
+                    ],
+                    extend: [
+                        { required: true, message: '请填写表单扩展', trigger: 'blur' },
+                        {pattern:this.$validator.regExpChinese,message: '表单扩展输入不正确', trigger: 'blur'}
                     ]
                 }
             },

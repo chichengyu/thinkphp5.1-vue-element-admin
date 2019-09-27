@@ -49,6 +49,8 @@
                 <!-- swicth开关 -->
                 <el-switch v-if="item.type==='switch'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :disabled="item.disabled" :active-value="item.activeValue" :inactive-value="item.inactiveValue" active-color="#52BEA6" inactive-color="#ff4949" :active-text="item.activeText||''" :inactive-text="item.inactiveText||''"></el-switch>
             </el-form-item>
+            <!-- 扩展 -->
+            <slot name="form"/>
             <!-- 按钮操作 -->
             <el-form-item v-if="form.buttons&&form.buttons.options" :align="form.buttons.align||'left'">
                 <el-button v-for="(item,key) in form.buttons.options" :type="item.type" :size="item.size" :key="key" :disabled="item.disabled" @click="item.method && item.method($refs['form'])">{{ item.title }}</el-button>
