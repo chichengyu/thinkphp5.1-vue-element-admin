@@ -20,5 +20,5 @@ export default {
     //URL正则
     regExpUrl:/^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
     // 非零正整数
-    regExpIsInteger:/^\+?[1-9][0-9]*$/,
+    regExpInteger:/^\+?[1-9][0-9]*$/,
 };
