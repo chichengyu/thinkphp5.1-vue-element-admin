@@ -94,8 +94,10 @@ export default {
             let first = this.siderBarList[0];
             if (first.children){
                 first = first.children[0];
+                this.menuIndex = '0-0';
             }else {
                 first = this.siderBarList[0];
+                this.menuIndex = '0';
             }
             first.tabBtnActive = true;
             this.tabBtnList.push(first);
