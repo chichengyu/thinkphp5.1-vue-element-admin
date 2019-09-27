@@ -3,9 +3,14 @@ let validate = {
     isEmpty:function(obj){
         if(typeof obj == "undefined" || obj == null || obj == ""){
             return true;
-        }else{
-            return false;
         }
+        return false;
+    },
+    extend:function (reg,val,callback,msg='') {
+        if(reg.test(val)){
+            return callback();
+        }
+        return callback(new Error(msg));
     }
 };
 for (let key in regexp){

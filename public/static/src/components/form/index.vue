@@ -3,7 +3,7 @@
         <el-form ref="form" :inline="form.inline||false" :model="form.formFields" :rules="form.rules" :label-width="form.labelWidth||'100px'" :label-position="form.labelPosition||'right'" class="demo-ruleForm">
             <el-form-item v-for="(item,index) in form.formLable" :key="index" :label="item.title" :prop="item.prop" :style="item.style||''">
                 <!-- 输入框 -->
-                <el-input v-if="item.type==='input'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :show-password="item.password" :size="item.size" :disabled="item.disabled" :style="{width:item.width}" :placeholder="item.placeholder"></el-input>
+                <el-input v-if="item.type==='input'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :show-password="item.password" :size="item.size" :disabled="item.disabled" :style="{width:item.width}" :prefix-icon="item.prefixIcon||''" :placeholder="item.placeholder"></el-input>
                 <!-- 数字输入框 -->
                 <el-input-number v-if="item.type==='inputNumber'" v-model="form.formFields[item.prop]" @change="item.change&&item.change(form.formFields[item.prop])" :min="item.min" :max="item.max" :step="item.step" :size="item.size" :disabled="item.disabled" :style="{width:item.width}"></el-input-number>
                 <!-- 文本域 -->

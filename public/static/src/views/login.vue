@@ -3,16 +3,16 @@
 		<div class="mask">
 			<div class="login-container">
 				<h2 class="title">棕牛管理系统</h2>
-				<div class="login-form">
-					<el-form ref="formInline" :label-position="'right'" :model="formInline">
-						<el-form-item label="">
-							<el-input v-model="formInline.username" prefix-icon="el-icon-user" placeholder="请输入账号"></el-input>
+				<div class="login-form" :rules="rules">
+					<el-form ref="form" :model="form" :rules="rules" >
+						<el-form-item label="" prop="username">
+							<el-input v-model="form.username" prefix-icon="el-icon-user" placeholder="请输入账号"></el-input>
+						</el-form-item>
+						<el-form-item label="" prop="password">
+							<el-input v-model="form.password" :show-password="true" prefix-icon="el-icon-lock" @keyup.enter.native="handleSubmit('form')" placeholder="请输入密码"></el-input>
 						</el-form-item>
 						<el-form-item label="">
-							<el-input v-model="formInline.password" :show-password="true" prefix-icon="el-icon-lock" @keyup.enter.native="handleSubmit('formInline')" placeholder="请输入密码"></el-input>
-						</el-form-item>
-						<el-form-item label="">
-							<el-button type="primary" @click.native="handleSubmit('formInline')">登录</el-button>
+							<el-button type="primary" @click.native="handleSubmit('form')">登录</el-button>
 						</el-form-item>
 					</el-form>
 				</div>
@@ -31,39 +31,41 @@ export default {
     name:'login',
     data () {
         return {
-            formInline: {
+            form: {
                 username: '',
                 password: ''
             },
-            ruleInline: {
+            rules: {
                 username: [
-                    { required: true, message: '请输入账号', trigger: 'blur' }
+                    { required: true, message: '请输入账号', trigger: 'blur' },
+					{ pattern:this.$validator.regExpPhone, message: '账号输入不正确', trigger: 'blur' }
                 ],
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
+					{ pattern:this.$validator.regExpPassword, message: '密码长度不正确', trigger: 'blur' }
                 ]
             }
         }
     },
     methods: {
         handleSubmit(name) {
-        	// 没有登陆接口时，直接放开登陆，默认以超级管理员登陆
-			var userInfo = {
+			// 没有登陆接口时，直接放开登陆，默认以超级管理员登陆
+			/*var userInfo = {
 				name: "超级管理员",
 				roles: 1,
 				rules: [],
 				token: "9ee7bSOKJchJxFqC5/gx/6JTXgOWpfQlpYvzyhjz3Ib1I3Mom9xs3GBjwuNtkqMV/sOskfJKI2ZvOwPmmI702IPl0paT"
 			};
-			
+
 			this.$ls.set('userInfo',userInfo);
 			this.$store.dispatch('setUserInfo',userInfo);
 			this.success('登陆成功！');
 			this.$router.push('/home');
-			return;
+			return;*/
 
 			this.$progress.start();
-            var username = this.formInline.username,
-               	password = md5(this.formInline.password);
+            var username = this.form.username,
+               	password = md5(this.form.password);
             if(!username){
         		this.error('请输入账号!');
 				this.$progress.done();

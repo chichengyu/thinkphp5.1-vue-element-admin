@@ -28,7 +28,7 @@ export default {
                     switch:true
                 },
                 formLable:[
-                    {prop: 'name', title: '名称', type: 'input',disabled:false,placeholder:'请输入姓名'},
+                    {prop: 'name', title: '名称', type: 'input',disabled:false,prefixIcon:'el-icon-user',placeholder:'请输入姓名'},
                     {prop: 'nameLine', title: '同行显示', type: 'input',style:{display:'inline-block',transform:'translateX(27px)'}},
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
                     {prop: 'password', title: '密码', type: 'input',password:true},
@@ -106,10 +106,10 @@ export default {
                         { required: true, message: '请选择活动区域', trigger: 'change' }
                     ],
                     password: [
-                        { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+                        { type: 'string', required: true, message: '请选择日期', trigger: 'change' }
                     ],
                     text: [
-                        { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+                        { type: 'string', required: true, message: '请选择时间', trigger: 'change' }
                     ],
                     select: [
                         { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
