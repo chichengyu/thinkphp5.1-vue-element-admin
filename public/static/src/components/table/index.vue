@@ -62,7 +62,7 @@
                     <template v-if="data.tableOption.buttons" v-for="(item,key) in data.tableOption.buttons">
                         <el-button :key="key" v-if="item.title !== '删除'"
                             :type="item.type"
-                            @click="item.methods(scope)"
+                            @click="item.click(scope,item)"
                             :size="item.size||'mini'"
                             v-has="item.directives && item.directives.length && item.directives[0].value">
                             {{ item.title }}
@@ -95,7 +95,7 @@ export default {
         data:{
             type:Object,
             default:() => {}
-        }
+        },
     },
     data() {return {count:0}},
     watch:{
@@ -114,13 +114,13 @@ export default {
         handleOk(currentBtn,scope){
             // scope._self.$refs[`popover${scope.$index}`].$refs.popper.click();
             scope._self.$el.click();
-            currentBtn.methods.ok && currentBtn.methods.ok(scope);
+            currentBtn.click.ok && currentBtn.click.ok(scope,currentBtn);
         },
         // popover 框  / 取消删除
         handleCancel(currentBtn,scope){
             // scope._self.$refs[`popover${scope.$index}`].$refs.popper.click();
             scope._self.$el.click();
-            currentBtn.methods.cancel && currentBtn.methods.cancel(scope);
+            currentBtn.click.cancel && currentBtn.click.cancel(scope,currentBtn);
         },
         treeClick:function(item,index){
             if(item.open){

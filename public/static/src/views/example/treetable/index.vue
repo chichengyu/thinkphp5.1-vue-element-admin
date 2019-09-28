@@ -1,6 +1,6 @@
 <template>
     <div class="table">
-        <component-table :data="tableData"></component-table>
+        <component-table v-if="tableData.tableData.length>0" :data="tableData"></component-table>
     </div>
 </template>
 
@@ -21,11 +21,23 @@ export default {
                     label:'操作',
                     width:230,
                     buttons:[
-                        {prop:'detail',title:'查看',methods:(params) => {console.log(params)}},
-                        {prop:'edit',title:'编辑',type:'primary',methods:(params) => {console.log(params)}},
-                        {prop:'del',title:'删除',type:'danger',methods:{
-                                ok:(params) => {console.log('确认删除',params)},
-                                cancel:(params) => {console.log('取消删除',params)}
+                        {prop:'detail',title:'查看',click:(params,currentBtn) => {
+                            console.log(params);
+                            console.log(currentBtn);
+                        }},
+                        {prop:'edit',title:'编辑',type:'primary',click:(params,currentBtn) => {
+                            console.log(params);
+                            console.log(currentBtn);
+                        }},
+                        {prop:'del',title:'删除',type:'danger',click:{
+                                ok:(params,currentBtn) => {
+                                    console.log('确认删除',params);
+                                    console.log(currentBtn);
+                                },
+                                cancel:(params,currentBtn) => {
+                                    console.log('取消删除',params);
+                                    console.log(currentBtn);
+                                }
                         }},
                     ]
                 },
