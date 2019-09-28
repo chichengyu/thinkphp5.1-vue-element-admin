@@ -62,7 +62,7 @@
                     <template v-if="data.tableOption.buttons" v-for="(item,key) in data.tableOption.buttons">
                         <el-button :key="key" v-if="item.title !== '删除'"
                             :type="item.type"
-                            @click="item.click(scope,item)"
+                            @click="item.click&&item.click(scope,item)"
                             :size="item.size||'mini'"
                             v-has="item.directives && item.directives.length && item.directives[0].value">
                             {{ item.title }}
