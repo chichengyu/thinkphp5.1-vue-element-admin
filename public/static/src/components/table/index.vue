@@ -60,7 +60,7 @@
                 :align="data.tableOption.align||'center'">
                 <template slot-scope="scope">
                     <template v-if="data.tableOption.buttons" v-for="(item,key) in data.tableOption.buttons">
-                        <el-button :key="key" v-if="item.title !== '删除'"
+                        <el-button :key="key" v-if="!item.tooltip"
                             :type="item.type"
                             @click="item.click&&item.click(scope,item)"
                             :size="item.size||'mini'"

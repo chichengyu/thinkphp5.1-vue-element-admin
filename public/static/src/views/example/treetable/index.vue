@@ -29,7 +29,7 @@ export default {
                             console.log(params);
                             console.log(currentBtn);
                         }},
-                        {prop:'del',title:'删除',type:'danger',click:{
+                        {prop:'del',title:'删除',tooltip:true,type:'danger',click:{
                                 ok:(params,currentBtn) => {
                                     console.log('确认删除',params);
                                     console.log(currentBtn);
