@@ -37,7 +37,7 @@ export default {
                 },
                 formLable:[
                     {prop: 'name', title: '名称', type: 'input',disabled:false,prefixIcon:'el-icon-user',placeholder:'请输入姓名'},
-                    {prop: 'nameLine', title: '同行显示', type: 'input',style:{display:'inline-block',transform:'translateX(27px)'}},
+                    {prop: 'nameLine', title: '同行显示', type: 'input',formItemStyle:{width:'500px'},style:{display:'inline-block',width:'100px',transform:'translateX(27px)'}},
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
                     {prop: 'password', title: '密码', type: 'input',password:true},
                     {prop: 'text', title: '文本域', type: 'textarea',placeholder: '我是自定义内容'},
@@ -122,8 +122,9 @@ export default {
                 ],
                 buttons:{
                     align:'left',
+                    style:{display:'block',width:'600px'},
                     options:[
-                        {title:'提交',type:'primary',loading:false,click:(form,item) => {
+                        {title:'提交',type:'primary',style:{width:'100px'},loading:false,click:(form,item) => {
                                 item.loading = true;
                                 console.log(form);
                                 console.log(form.validate);

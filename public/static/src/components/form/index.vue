@@ -1,7 +1,7 @@
 <template>
     <div class="form" :style="'width:'+width+'%;padding: 32px 32px 32px 0;background:#fff;'">
         <el-form ref="form" :inline="data.inline||false" :model="data.formFields" :rules="data.rules" :label-width="data.labelWidth||'100px'" :label-position="data.labelPosition||'right'" class="demo-ruleForm">
-            <el-form-item v-for="(item,index) in data.formLable" :key="index" :label="item.title" :prop="item.prop" :style="item.style||''">
+            <el-form-item v-for="(item,index) in data.formLable" :key="index" :label="item.title" :prop="item.prop" :style="item.formItemStyle||''">
                 <!-- 输入框 -->
                 <el-input v-if="item.type==='input'" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :show-password="item.password" :size="item.size" :disabled="item.disabled" :style="item.style||''" :prefix-icon="item.prefixIcon||''" :placeholder="item.placeholder"></el-input>
                 <!-- 数字输入框 -->
@@ -54,7 +54,7 @@
             <!-- 扩展 -->
             <slot name="form"/>
             <!-- 按钮操作 -->
-            <el-form-item v-if="data.buttons&&data.buttons.options" :align="data.buttons.align||'left'">
+            <el-form-item v-if="data.buttons&&data.buttons.options" :align="data.buttons.align||'left'" :style="data.buttons.style||''">
                 <el-button v-for="(item,key) in data.buttons.options" :loading="item.loading||false" :type="item.type" :size="item.size" :key="key" :style="item.style||''" :disabled="item.disabled" @click="item.click && item.click($refs['form'],item)">{{ item.title }}</el-button>
             </el-form-item>
         </el-form>
