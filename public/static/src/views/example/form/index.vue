@@ -123,8 +123,12 @@ export default {
                 buttons:{
                     align:'left',
                     options:[
-                        {title:'提交',type:'primary',method:(form) => {
-                            form.validate(valid => {
+                        {title:'提交',type:'primary',loading:false,click:(form,item) => {
+                                item.loading = true;
+                                console.log(form);
+                                console.log(form.validate);
+                                console.log(item);
+                                form.validate(valid => {
                                 if (valid){
                                     console.log('提交');
                                 }else{
@@ -132,7 +136,7 @@ export default {
                                 }
                             });
                         }},
-                        {title:'重置',method:(form) => {
+                        {title:'重置',click:(form) => {
                             console.log('重置');
                             form.resetFields();
                         }},
