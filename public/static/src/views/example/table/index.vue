@@ -70,7 +70,7 @@ export default {
         // 列初始化
         labelInit(){
             this.tableData.tableLabel = [
-                {prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center'},
+                {prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center',style:(params,item)=>{return {color:'red'}}},
                 {prop:'name',title:'名称',width:100},
                 {prop:'date',title:'日期',minWidth:150,render:(params) => {
                     // console.log(params);
@@ -78,9 +78,9 @@ export default {
                 }},
                 {prop:'province',title:'省份'},
                 {prop:'city',title:'城市'},
-                {prop:'address',title:'地址',tooltip:true,width:150},
+                {prop:'address',title:'地址',tooltip:true,width:150,style:(params,item)=>{return {color:'red'}}},
                 {prop:'zip',title:'邮编',sort:'custom'},
-                {prop:'status',title:'状态',isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}
+                {prop:'status',title:'状态',style:(params,item)=>{return {display:'none'}},isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}
             ];
         },
         // 数据初始化

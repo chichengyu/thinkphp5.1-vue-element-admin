@@ -24,6 +24,7 @@
                 <template slot-scope="scope">
                     <!-- 有 swicth 开关 -->
                     <el-switch v-if="col.isSwitch"
+                        :style="col.style&&col.style(scope,col)"
                         :disabled="col.isSwitch.disabled"
                         v-model="scope.row.status"
                         active-color="#52BEA6"
@@ -33,22 +34,22 @@
                         @change="col.isSwitch.change && col.isSwitch.change(scope)">
                     </el-switch>
                     <!-- tree树形 -->
-                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="{marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'}">
+                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.style&&col.style(scope,col)||{})">
                         <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
                         <i class="el-icon-arrow-right" v-else></i>
                         <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
                     </div>
                     <div v-else-if="col.tooltip">
                         <el-tooltip placement="top">
-                            <div slot="content">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
-                            <div style="width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                            <div slot="content" :style="col.style&&col.style(scope,col)">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                            <div :style="Object.assign({width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'},col.style&&col.style(scope,col)||{})">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
                         </el-tooltip>
                     </div>
 <!--                    <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
                     <div v-else>
-                        <div v-if="scope.row.xgrade>0&&col.hasChildren" :style="{marginLeft:(scope.row.xgrade+0.6)+'em'}">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                        <div v-if="scope.row.xgrade>0&&col.hasChildren" :style="Object.assign({marginLeft:(scope.row.xgrade+0.6)+'em'},col.style&&col.style(scope,col)||{})">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
 <!--                        <div v-else-if="scope.row.xgrade==0&&col.hasChildren" style="margin-left: 0.9em">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
-                        <div v-else>{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
+                        <div v-else :style="col.style&&col.style(scope,col)">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
                     </div>
                 </template>
             </el-table-column>
@@ -60,11 +61,10 @@
                 :align="data.tableOption.align||'center'">
                 <template slot-scope="scope">
                     <template v-if="data.tableOption.buttons" v-for="(item,key) in data.tableOption.buttons">
-                        <template v-if="item.render">
-                            {{ item.render&&item.render(scope,item) }}
-                        </template>
-                        <el-button :key="key" v-else-if="!item.tooltip"
+<!--                        <div v-if="item.render" v-html="item.render(scope,item)" style="display: inline-block"></div>-->
+                        <el-button :key="key" v-if="!item.tooltip"
                             :type="item.type"
+                            :style="item.style&&item.style(scope,item)"
                             @click="item.click&&item.click(scope,item)"
                             :size="item.size||'mini'"
                             v-has="item.directives && item.directives.length && item.directives[0].value">
@@ -79,7 +79,7 @@
                                 <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel(item,scope)">取消</el-button>
                                 <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk(item,scope)">确定</el-button>
                             </div>
-                            <el-button v-has="item.directives && item.directives.length && item.directives[0].value" :type="item.type" size="mini" slot="reference">{{ item.title||'删除' }}</el-button>
+                            <el-button v-has="item.directives && item.directives.length && item.directives[0].value" :type="item.type":style="item.style&&item.style(scope,item)" size="mini" slot="reference">{{ item.title||'删除' }}</el-button>
                         </el-popover>
                     </template>
                 </template>
