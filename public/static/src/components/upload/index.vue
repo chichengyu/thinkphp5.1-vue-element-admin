@@ -69,7 +69,7 @@ export default {
             type:Boolean,
             default:true
         },
-        params:[String,Object] // 传递的参数，用于外部判断
+        params:[String,Number,Object,Array],// 传递的参数，用于外部判断
     },
     data() {
         return {
