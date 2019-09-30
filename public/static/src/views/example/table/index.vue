@@ -24,7 +24,11 @@ export default {
                         {title:'查看',click:(params,currentBtn) => {
                             console.log(params);
                             console.log(currentBtn);
-                        }},
+                        },render:(params,item)=>{
+                                console.log(params);
+                                return 123;
+                            }
+                        },
                         {title:'编辑',directives:[{name:'has',value:'edit'}],type:'primary',click:(params,currentBtn) => {
                             console.log(params);
                             console.log(currentBtn);
