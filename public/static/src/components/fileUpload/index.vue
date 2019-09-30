@@ -93,11 +93,6 @@ export default {
             this.$emit('before',file,this.params);
         },
         handleSuccess(response, file, fileList){
-            if (response.code == 1){
-                this.success('上传成功！');
-            }else{
-                this.error('上传失败！');
-            }
             this.fileImageList = fileList;
             this.$emit('success',response, file, fileList,this.params);
         },
