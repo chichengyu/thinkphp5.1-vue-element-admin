@@ -9,7 +9,7 @@
             :accept="accept"
             :headers="headers"
             :file-list="fileImageList"
-            :data="params"
+            :data="data"
             :before-upload="handleBefore"
             :on-success="handleSuccess"
             :on-error="handleError">
@@ -60,7 +60,7 @@ export default {
             type:String,
             default:'.jpg,.jpeg,.png'
         },
-        params:{// 上传时附带的额外参数
+        data:{// 上传时附带的额外参数
             type:Object,
             default:() => {}
         },
@@ -68,7 +68,8 @@ export default {
         autoUpload:{// 是否在选取文件后立即进行上传
             type:Boolean,
             default:true
-        }
+        },
+        params:[String,Object] // 传递的参数，用于外部判断
     },
     data() {
         return {
@@ -112,7 +113,7 @@ export default {
                     }else{
                         this.error('删除失败！');
                     }
-                    this.$emit('remove',file);
+                    this.$emit('remove',file,this.params);
                 }).catch(err => {
                    return Promise.reject('删除失败！',err);
                 });
@@ -123,19 +124,14 @@ export default {
             this.visible = true;
         },
         handleBefore(file){
-            this.$emit('before',file);
+            this.$emit('before',file,this.params);
         },
         handleSuccess(response, file, fileList){
-            if (response.code == 1){
-                this.success('上传成功！');
-            }else{
-                this.error('上传失败！');
-            }
             this.fileImageList = fileList;
-            this.$emit('success',response, file, fileList);
+            this.$emit('success',response, file, fileList,this.params);
         },
         handleError(err, file, fileList){
-            this.$emit('error',err, file, fileList);
+            this.$emit('error',err, file, fileList,this.params);
         }
     }
 }

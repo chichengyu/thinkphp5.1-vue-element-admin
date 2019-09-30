@@ -8,7 +8,7 @@
             :accept="accept"
             :headers="headers"
             :file-list="fileImageList"
-            :data="params"
+            :data="data"
             :before-upload="handleBefore"
             :on-success="handleSuccess"
             :on-error="handleError">
@@ -37,7 +37,7 @@ export default {
             type:String,
             default:'.xlsx'
         },
-        params:{// 上传时附带的额外参数
+        data:{// 上传时附带的额外参数
             type:Object,
             default:() => {}
         },
@@ -57,6 +57,7 @@ export default {
             type:String,
             default:'small'
         },
+        params:[String,Object] // 传递的参数，用于外部判断
     },
     data() {
         return {
@@ -89,7 +90,7 @@ export default {
             }
         },*/
         handleBefore(file){
-            this.$emit('before',file);
+            this.$emit('before',file,this.params);
         },
         handleSuccess(response, file, fileList){
             if (response.code == 1){
@@ -98,10 +99,10 @@ export default {
                 this.error('上传失败！');
             }
             this.fileImageList = fileList;
-            this.$emit('success',response, file, fileList);
+            this.$emit('success',response, file, fileList,this.params);
         },
         handleError(err, file, fileList){
-            this.$emit('error',err, file, fileList);
+            this.$emit('error',err, file, fileList,this.params);
         }
     }
 }

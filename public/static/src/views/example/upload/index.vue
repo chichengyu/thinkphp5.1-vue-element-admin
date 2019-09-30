@@ -1,7 +1,7 @@
 <template>
     <div style="">
         <!-- 单张 -->
-        <component-upload :action="'#'" :previewImages="url"
+        <component-upload :action="'#'" :previewImages="url" :params="{name:'小二'}"
             @before="handleBefore"
             @success="handleSuccess"
             @remove="handleRemove">
@@ -17,7 +17,7 @@
         </component-upload>
 
         <!-- 文件上传 -->
-        <component-file-upload :action="actionFileUploadUrl" :size="'default'" :title="'导入'" @before="handleExcelBefore" @success="handleExcelbSuccess" @error="handleExcelError"></component-file-upload>
+        <component-file-upload :action="actionFileUploadUrl" :size="'default'" :title="'导入'" @before="handleExcelBefore" @success="handleExcelbSuccess" @error="handleExcelError" :params="{name:'小二'}"></component-file-upload>
 
     </div>
 </template>
@@ -41,22 +41,22 @@ export default {
         }
     },
     methods:{
-        handleBefore(file){
+        handleBefore(file,params){
             console.log(file);
         },
-        handleSuccess(response, file, fileList){
+        handleSuccess(response, file, fileList,params){
             console.log(response);
         },
-        handleRemove(file){
+        handleRemove(file,params){
             console.log('删除图片',file);
         },
-        handleExcelBefore(params){
+        handleExcelBefore(file,params){
             console.log(params);
         },
-        handleExcelbSuccess(params){
-            console.log(params);
+        handleExcelbSuccess(response, file, fileList,params){
+            console.log(params,params);
         },
-        handleExcelError(params){
+        handleExcelError(response, file, fileList,params){
             tconsole.log(params);
         },
     }
