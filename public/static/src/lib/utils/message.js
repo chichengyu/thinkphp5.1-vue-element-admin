@@ -26,8 +26,8 @@ export const error = function (msg) {
         center: true
     });
 };
-export const confirm = function (content,success,error,options={},title='') {
-    ElementUI.MessageBox.confirm(title, content, Object.assign({
+export const confirm = function (title,success,error,options={},content='') {
+    ElementUI.MessageBox.confirm(content, title, Object.assign({
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
