@@ -26,3 +26,15 @@ export const error = function (msg) {
         center: true
     });
 };
+export const confirm = function (content,success,error,options={},title='') {
+    ElementUI.MessageBox.confirm(title, content, Object.assign({
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: 'center',
+    },options)).then(() => {
+        return success && success();
+    }).catch(() => {
+        return error && error();
+    });
+};
