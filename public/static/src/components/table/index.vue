@@ -79,7 +79,7 @@
                                 <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel(item,scope)">取消</el-button>
                                 <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk(item,scope)">确定</el-button>
                             </div>
-                            <el-button v-has="item.directives && item.directives.length && item.directives[0].value" :type="item.type":style="item.style&&item.style(scope,item)" size="mini" slot="reference">{{ item.title||'删除' }}</el-button>
+                            <el-button v-has="item.directives && item.directives.length && item.directives[0].value" :type="item.type" :style="item.style&&item.style(scope,item)" size="mini" slot="reference">{{ item.title||'删除' }}</el-button>
                         </el-popover>
                     </template>
                 </template>
