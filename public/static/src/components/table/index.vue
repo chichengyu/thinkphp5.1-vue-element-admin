@@ -188,7 +188,7 @@ util.treeTableXcode = function(data,xcode,xgrade){
 util.size = function (data) {
     let len = data.length || 0;
     for(var i=0;i<data.length;i++){
-        if (data[i].children){
+        if (data[i].open && data[i].children){
             len += util.size(data[i].children)
         }
     }
