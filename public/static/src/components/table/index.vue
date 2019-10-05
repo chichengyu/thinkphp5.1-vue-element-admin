@@ -23,15 +23,17 @@
                 :align="col.align||'left'">
                 <template slot-scope="scope">
                     <!-- 有 swicth 开关 -->
-                    <el-switch v-if="col.isSwitch"
+                    <el-switch class="switchStyle" v-if="col.isSwitch"
                         :style="col.style&&col.style(scope,col)"
-                        :disabled="col.isSwitch.disabled"
+                        :disabled="col.disabled"
                         v-model="scope.row.status"
                         active-color="#52BEA6"
-                        inactive-color="#ff4949"
+                        inactive-color="#ccc"
                         :active-value="1"
                         :inactive-value="0"
-                        @change="col.isSwitch.change && col.isSwitch.change(scope)">
+                        :active-text="col.activeText||'正常'"
+                        :inactive-text="col.inactiveText||'禁用'"
+                        @change="col.change && col.change(scope)">
                     </el-switch>
                     <!-- tree树形 -->
                     <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)" :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.style&&col.style(scope,col)||{})">
@@ -204,5 +206,41 @@ util.size = function (data) {
 .el-pagination{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.table >>> .switchStyle .el-switch__label {
+    position: absolute;
+    display: none;
+    color: #fff;
+    width: 100%;
+}
+.table >>> .switchStyle .el-switch__label--left {
+    width: 100%;
+    z-index: 9;
+    left: 24px;
+}
+.table >>> .switchStyle .el-switch__label--right {
+    width: 100%;
+    z-index: 9;
+    /*margin-left: 6px;*/
+}
+.table >>> .switchStyle .el-switch__label.is-active {
+    display: block;
+    width: 100%;
+}
+.table >>> .switchStyle.el-switch .el-switch__core, .el-switch .el-switch__label {
+    /*width: 50px !important;*/
+    padding: 0 30px !important;
+    height: 24px !important;
+    border-radius: 12px;
+}
+.table >>> .switchStyle.el-switch{
+    height: 24px !important;
+}
+.table >>> .el-switch__core:after{
+    width: 20px;
+    height: 20px;
+}
+.table >>> .switchStyle.el-switch.is-checked .el-switch__core:after{
+    margin-left: -21px !important;
 }
 </style>

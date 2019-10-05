@@ -49,7 +49,7 @@
                 <!-- 日期时间范围 -->
                 <el-date-picker v-if="item.type==='datetimerange'" type="datetimerange" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :value-format="item.format" :size="item.size" :disabled="item.disabled" :style="item.style||''" start-placeholder="开始时间" end-placeholder="结束时间"></el-date-picker>
                 <!-- swicth开关 -->
-                <el-switch v-if="item.type==='switch'" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :disabled="item.disabled" :active-value="item.activeValue" :inactive-value="item.inactiveValue" active-color="#52BEA6" inactive-color="#ff4949" :active-text="item.activeText||''" :inactive-text="item.inactiveText||''"></el-switch>
+                <el-switch v-if="item.type==='switch'" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :disabled="item.disabled" :active-value="item.activeValue" :inactive-value="item.inactiveValue" active-color="#52BEA6" inactive-color="#ff4949" :active-text="item.activeText||''" :inactive-text="item.inactiveText||''" class="switchStyle"></el-switch>
             </el-form-item>
             <!-- 扩展 -->
             <slot name="form"/>
@@ -86,5 +86,40 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
+.form >>> .switchStyle .el-switch__label {
+    position: absolute;
+    display: none;
+    color: #fff;
+    width: 100%;
+}
+.form >>> .switchStyle .el-switch__label--left {
+    width: 100%;
+    z-index: 9;
+    left: 24px;
+}
+.form >>> .switchStyle .el-switch__label--right {
+    width: 100%;
+    z-index: 9;
+    /*margin-left: 6px;*/
+}
+.form >>> .switchStyle .el-switch__label.is-active {
+    display: block;
+    width: 100%;
+}
+.form >>> .switchStyle.el-switch .el-switch__core, .el-switch .el-switch__label {
+    /*width: 50px !important;*/
+    padding: 0 30px !important;
+    height: 24px !important;
+    border-radius: 12px;
+}
+.form >>> .switchStyle.el-switch{
+    height: 24px !important;
+}
+.form >>> .el-switch__core:after{
+    width: 20px;
+    height: 20px;
+}
+.form >>> .switchStyle.el-switch.is-checked .el-switch__core:after{
+    margin-left: -21px !important;
+}
 </style>

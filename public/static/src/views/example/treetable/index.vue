@@ -75,7 +75,7 @@ export default {
                 {prop:'city',title:'城市'},
                 {prop:'address',title:'地址',tooltip:true},
                 {prop:'zip',title:'邮编',sort:'custom'},
-                {prop:'status',title:'状态',isSwitch:{change:(currentData) => {console.log('switch开关',currentData)}}}
+                {prop:'status',title:'状态',isSwitch:true,activeText:'正常',inactiveText:'禁用',change:(currentData) => {console.log('switch开关',currentData)}}
             ];
         },
         // 数据初始化
