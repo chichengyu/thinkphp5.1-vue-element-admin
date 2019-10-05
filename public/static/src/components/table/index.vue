@@ -1,6 +1,6 @@
 <template>
-    <div class="table">
-        <el-table style="width: 100%"
+    <div class="table" style="width:100%;margin-top:5px">
+        <el-table style="width:100%"
             border
             v-loading="data.loading"
             :element-loading-text="data.loadingText||'Loading'"
