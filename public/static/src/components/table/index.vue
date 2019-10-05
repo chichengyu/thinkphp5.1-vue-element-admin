@@ -216,12 +216,12 @@ util.size = function (data) {
 .table >>> .switchStyle .el-switch__label--left {
     width: 100%;
     z-index: 9;
-    left: 24px;
+    left: 22px;
 }
 .table >>> .switchStyle .el-switch__label--right {
     width: 100%;
     z-index: 9;
-    /*margin-left: 6px;*/
+    margin-left: 8px;
 }
 .table >>> .switchStyle .el-switch__label.is-active {
     display: block;
@@ -229,18 +229,18 @@ util.size = function (data) {
 }
 .table >>> .switchStyle.el-switch .el-switch__core, .el-switch .el-switch__label {
     /*width: 50px !important;*/
-    padding: 0 30px !important;
-    height: 24px !important;
+    padding: 0 28px !important;
+    height: 22px !important;
     border-radius: 12px;
 }
 .table >>> .switchStyle.el-switch{
-    height: 24px !important;
+    height: 22px !important;
 }
 .table >>> .el-switch__core:after{
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 .table >>> .switchStyle.el-switch.is-checked .el-switch__core:after{
-    margin-left: -21px !important;
+    margin-left: -19px !important;
 }
 </style>
