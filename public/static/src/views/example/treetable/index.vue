@@ -66,6 +66,7 @@ export default {
         labelInit(){
             this.tableData.tableLabel = [
                 {prop:'id',title:'ID',type:'index',fixed:true,width:80},
+                {prop:'image',title:'缩略图',isPreview:true,width:100,style:(params,col)=>{return {height:'50px'}}},
                 {prop:'name',title:'名称',width:100,hasChildren:true,align:'left',style:(params)=>{return {color:'red'}}},
                 {prop:'date',title:'日期',render:(params) => {
                     // console.log(params);
@@ -90,9 +91,9 @@ export default {
                 }
                 this.tableData.loading = false;
             });*/
-            let data = [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,},
-                {id:2, date: '2016-05-04', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1517 弄', zip: 200333, status:1,},
-                {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,},
+            let data = [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
+                {id:2, date: '2016-05-04', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1517 弄', zip: 200333, status:1,image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
+                {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
                 {
                     id:4,
                     date: '2016-05-03',
@@ -102,6 +103,7 @@ export default {
                     address: '上海市普陀区金沙江路 1516 弄',
                     zip: 200333,
                     status:0,
+                    image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg',
                     children: [{
                         id: 31,
                         date: '2016-05-01',
@@ -112,6 +114,7 @@ export default {
                         address: '上海市普陀区金沙江路 1519 弄',
                         status:0,
                         zip: 200333,
+                        image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'
                     }, {
                         id: 32,
                         date: '2016-05-01',
@@ -122,8 +125,9 @@ export default {
                         address: '上海市普陀区金沙江路 1519 弄',
                         status:0,
                         zip: 200333,
+                        image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'
                     }]},
-                {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,},
+                {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
                 {
                     id:6,
                     date: '2016-05-03',
@@ -133,6 +137,7 @@ export default {
                     address: '上海市普陀区金沙江路 1516 弄',
                     zip: 200333,
                     status:0,
+                    image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg',
                     children: [{
                         id: 41,
                         date: '2016-05-01',
@@ -143,6 +148,7 @@ export default {
                         address: '上海市普陀区金沙江路 1519 弄',
                         status:0,
                         zip: 200333,
+                        image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'
                     }, {
                         id: 42,
                         date: '2016-05-01',
@@ -153,6 +159,7 @@ export default {
                         address: '上海市普陀区金沙江路 1519 弄',
                         status:0,
                         zip: 200333,
+                        image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'
                     },{
                         id: 43,
                         date: '2016-05-01',
@@ -162,7 +169,8 @@ export default {
                         city: '普陀区',
                         address: '上海市普陀区金沙江路 1519 弄',
                         status:0,
-                        zip: 200333,}]}];
+                        zip: 200333,
+                        image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'}]}];
             this.tableData.tableData = data;
         },
     },
