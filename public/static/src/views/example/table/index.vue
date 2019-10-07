@@ -1,6 +1,14 @@
 <template>
     <div class="table">
-        <component-table v-if="tableData.tableData.length>0" :data="tableData"></component-table>
+        <component-table v-if="tableData.tableData.length>0" :data="tableData">
+            <div slot="table">
+                <span>这是表格列扩展--局面插槽--</span>
+            </div>
+
+            <template v-slot="{params}">
+                <span>这是表格列扩展--作用域插槽-{{ params.row.id }}</span>
+            </template>
+        </component-table>
     </div>
 </template>
 
@@ -71,8 +79,13 @@ export default {
         labelInit(){
             this.tableData.tableLabel = [
                 {prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center',style:(params,item)=>{return {color:'red'}}},
+                {prop:'img',title:'缩略图',isPreview:true,width:100,style:(params,col) => {
+                        return {height:'50px'}
+                },render:(params,col) => {
+                        console.log(col);
+                }},
                 {prop:'name',title:'名称',width:100},
-                {prop:'date',title:'日期',minWidth:150,render:(params) => {
+                {prop:'date',title:'日期',minWidth:150,slot:'table',render:(params) => {/** 扩展列：slot:'table' **/
                     // console.log(params);
                     return '日期：' + params.row.date;
                 }},
@@ -95,11 +108,11 @@ export default {
                 }
                 this.tableData.loading = false;
             });*/
-            let data = [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,},
-                {id:2, date: '2016-05-04', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1517 弄', zip: 200333, status:1,},
-                {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,},
-                {id:4, date: '2016-05-03', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1516 弄', zip: 200333, status:0},
-                {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,}];
+            let data = [{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,img:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
+                {id:2, date: '2016-05-04', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1517 弄', zip: 200333, status:1,img:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
+                {id:3, date: '2016-05-01', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,img:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
+                {id:4, date: '2016-05-03', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1516 弄', zip: 200333, status:0,img:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
+                {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,img:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'}];
             this.tableData.tableData = data;
         },
     },

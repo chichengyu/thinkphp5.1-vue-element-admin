@@ -51,6 +51,14 @@
                     <div v-else>
                         <div v-if="scope.row.xgrade>0&&col.hasChildren" :style="Object.assign({marginLeft:(scope.row.xgrade+0.6)+'em'},col.style&&col.style(scope,col)||{})">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
 <!--                        <div v-else-if="scope.row.xgrade==0&&col.hasChildren" style="margin-left: 0.9em">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>-->
+                        <div v-else-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click="handlePreview(scope.row[col.prop])">
+<!--                            {{ col.render?col.render(scope):scope.row[col.prop] }}-->
+                            <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
+                        </div>
+                        <div v-else-if="col.slot">
+                            <slot :name="col.slot"></slot>
+                            <slot v-bind:params="scope"></slot>
+                        </div>
                         <div v-else :style="col.style&&col.style(scope,col)">{{ col.render?col.render(scope):scope.row[col.prop] }}</div>
                     </div>
                 </template>
@@ -90,6 +98,11 @@
 
         <!-- 分页 -->
         <el-pagination :align="data.page.align" :total="data.page.total" :current-page="data.page.currentPage" @current-change="data.page.currentChange" background layout="prev, pager, next"></el-pagination>
+
+        <!-- 缩略图查看 -->
+        <el-dialog title="预览" :visible.sync="visibled" :close-on-click-modal="false">
+            <img :src="previewUrl" width="100%" height="100%" alt="">
+        </el-dialog>
     </div>
 </template>
 
@@ -102,7 +115,7 @@ export default {
             default:() => {}
         },
     },
-    data() {return {count:0}},
+    data() {return {count:0,visibled:false,previewUrl:''}},
     watch:{
         data:{
             immediate:true,
@@ -167,7 +180,12 @@ export default {
             this.data.tableData.splice(Number(index)+1,util.size(item.children));
         },
         // 排序
-        handleSort(params){this.data.sortChange && this.data.sortChange(params);}
+        handleSort(params){this.data.sortChange && this.data.sortChange(params);},
+        // 缩略图查看
+        handlePreview(src){
+            this.previewUrl = src;
+            this.visibled = true;
+        }
     },
 }
 var util = {};
