@@ -53,6 +53,7 @@
             </el-form-item>
             <!-- 扩展 -->
             <slot name="form"/>
+            <slot v-bind:form="$refs['form']"/>
             <!-- 按钮操作 -->
             <el-form-item v-if="data.buttons&&data.buttons.options" :align="data.buttons.align||'left'" :style="data.buttons.style||''">
                 <el-button v-for="(item,key) in data.buttons.options" :loading="item.loading||false" :type="item.type" :size="item.size" :key="key" :style="item.style||''" :disabled="item.disabled" @click="item.click && item.click($refs['form'],item)">{{ item.title }}</el-button>

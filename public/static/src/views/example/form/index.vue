@@ -6,6 +6,11 @@
                     <el-input v-model="form.formFields.extend"></el-input>
                 </el-form-item>
             </template>
+            <template v-slot="{form}">
+                <el-form-item label="扩展表单" prop="extend">
+                    <el-button @click="test(form)">自定义表单提交验证</el-button>
+                </el-form-item>
+            </template>
         </component-form>
     </div>
 </template>
@@ -172,6 +177,11 @@ export default {
                     ]
                 }
             },
+        }
+    },
+    methods:{
+        test(form){
+            console.log(form.validate);
         }
     }
 }
