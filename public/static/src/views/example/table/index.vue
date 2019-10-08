@@ -80,18 +80,15 @@ export default {
             this.tableData.tableLabel = [
                 {prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center',style:(params,item)=>{return {color:'red'}}},
                 {prop:'img',title:'缩略图',isPreview:true,width:100,style:(params,col) => {
-                        return {height:'50px'}
-                },render:(params,col) => {
-                        console.log(col);
+                    return {height:'50px'}
                 }},
-                {prop:'name',title:'名称',width:100},
-                {prop:'date',title:'日期',minWidth:150,slot:'table',render:(params) => {/** 扩展列：slot:'table' **/
-                    // console.log(params);
-                    return '日期：' + params.row.date;
+                {prop:'name',title:'名称',width:100,render:(params,col) => {
+                    return [params.row.name,{color:'blue'}];
                 }},
+                {prop:'date',title:'日期',minWidth:150,slot:'table',/** 扩展列：slot:'table' **/},
                 {prop:'province',title:'省份'},
                 {prop:'city',title:'城市'},
-                {prop:'address',title:'地址',tooltip:true,width:150,style:(params,item)=>{return {color:'red'}}},
+                {prop:'address',title:'地址',tooltip:true,width:150},
                 {prop:'zip',title:'邮编',sort:'custom'},
                 {prop:'status',title:'状态',isSwitch:true,style:(params,item)=>{return {display:'none'}},activeText:'正常',inactiveText:'禁用',change:(currentData) => {console.log('switch开关',currentData)}}
             ];

@@ -67,10 +67,12 @@ export default {
             this.tableData.tableLabel = [
                 {prop:'id',title:'ID',type:'index',fixed:true,width:80},
                 {prop:'image',title:'缩略图',isPreview:true,width:100,style:(params,col)=>{return {height:'50px'}}},
-                {prop:'name',title:'名称',width:100,hasChildren:true,align:'left',style:(params)=>{return {color:'red'}}},
+                {prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {
+                    return [params.row.name,{color:'red'}];
+                }},
                 {prop:'date',title:'日期',render:(params) => {
                     // console.log(params);
-                    return '--'+params.row.date;
+                    return [params.row.date];
                 }},
                 {prop:'province',title:'省份'},
                 {prop:'city',title:'城市'},
