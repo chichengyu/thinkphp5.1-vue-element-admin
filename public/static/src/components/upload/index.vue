@@ -107,14 +107,15 @@ export default {
         handleRemove(file) {
             this.$emit('remove',file,this.fileImageList,this.params,()=>{
                 this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1)
-            },(delImageUrl,path)=>{
-                if (file.response && file.response.path) {
+            },(delImageUrl,params,header={},type='post')=>{
+                if (delImageUrl && params) {
                     this.axios.request({
                         // url:delUploadImageUrl,
                         url:delImageUrl,
-                        method:'post',
+                        method:type,
+                        headers,
                         // data:{path:file.response.path}
-                        data:{path:path}
+                        data:params
                     }).then(res => {
                         if (res.data.code == 1){
                             this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1);
@@ -126,6 +127,8 @@ export default {
                     }).catch(err => {
                         return Promise.reject('删除失败！',err);
                     });
+                }else{
+                    throw new Error('两个参数：接口地址或与数据必须传递！');return;
                 }
             });
         },

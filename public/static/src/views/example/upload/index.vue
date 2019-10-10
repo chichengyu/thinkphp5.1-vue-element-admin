@@ -54,10 +54,12 @@ export default {
             console.log(params);
             // fileImageList 已显示的图片列表数组，可以执行如代码进行删除显示图片，fileImageList.includes(file) && fileImageList.splice(fileImageList.indexOf(file),1);
             // callBack 函数，执行后 删除界面上看到的图片列表
-            /**
-             * autoRequestCallBack 函数,接收辆个个参数，执行后自动请求服务器删除界面上看到的图片列表
+            /** autoRequestCallBack 函数，执行后自动请求服务器删除界面上看到的图片列表
+             * post方式,接收辆个个参数
              * 参数一：为要删除的图片服务器接口
-             * 参数二：为要删除的图片路径
+             * 参数二：为要传递的数据
+             * 参数三：为要设置的请求头
+             * 参数二：为要请求接口的方式，默认post
              */
         },
         handleExcelBefore(file,params){
