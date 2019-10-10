@@ -59,7 +59,7 @@ export default {
              * 参数一：为要删除的图片服务器接口
              * 参数二：为要传递的数据
              * 参数三：为要设置的请求头
-             * 参数二：为要请求接口的方式，默认post
+             * 参数四：为要请求接口的方式，默认post
              */
         },
         handleExcelBefore(file,params){
