@@ -26,7 +26,7 @@
                 </span>
             </div>
         </el-upload>
-        <el-dialog title="预览" :visible.sync="visible">
+        <el-dialog title="预览" :visible.sync="visible" :append-to-body="appendToBody">
             <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
     </div>
@@ -69,6 +69,10 @@ export default {
             type:Boolean,
             default:true
         },
+        appendToBody:{// 是否嵌套 嵌套的 Dialog 必须指定该属性并赋值为 true
+            type:Boolean,
+            default:false
+        },
         params:[String,Number,Object,Array],// 传递的参数，用于外部判断
     },
     data() {
@@ -101,23 +105,29 @@ export default {
     },
     methods: {
         handleRemove(file) {
-            if (file.response && file.response.path) {
-                this.axios.request({
-                    url:delUploadImageUrl,
-                    method:'post',
-                    data:{path:file.response.path}
-                }).then(res => {
-                    if (res.data.code == 1){
-                        this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1);
-                        this.success('删除成功！');
-                    }else{
-                        this.error('删除失败！');
-                    }
-                    this.$emit('remove',file,this.params);
-                }).catch(err => {
-                   return Promise.reject('删除失败！',err);
-                });
-            }
+            this.$emit('remove',file,this.fileImageList,this.params,()=>{
+                this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1)
+            },(delImageUrl,path)=>{
+                if (file.response && file.response.path) {
+                    this.axios.request({
+                        // url:delUploadImageUrl,
+                        url:delImageUrl,
+                        method:'post',
+                        // data:{path:file.response.path}
+                        data:{path:path}
+                    }).then(res => {
+                        if (res.data.code == 1){
+                            this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1);
+                            this.success('删除成功！');
+                        }else{
+                            this.error('删除失败！');
+                        }
+                        this.$emit('remove',file,this.params);
+                    }).catch(err => {
+                        return Promise.reject('删除失败！',err);
+                    });
+                }
+            });
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;

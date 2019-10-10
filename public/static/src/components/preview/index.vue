@@ -4,45 +4,51 @@
         :visible.sync="visibled"
         :width="width+'%'"
         :close-on-click-modal="false"
+        :append-to-body="appendToBody"
         :before-close="handleClose">
         <img :src="src" width="100%" height="100%" alt="">
     </el-dialog>
 </template>
 
 <script>
-    export default {
-        props:{
-            src:{
-                type:String,
-                required:true
-            },
-            width:{
-                type:Number,
-                default:30
-            },
-            title:{
-                type:String,
-                default: '预览'
-            }
+export default {
+    name:'Preview',
+    props:{
+        src:{
+            type:String,
+            required:true
         },
-        data() {
-            return {};
+        width:{
+            type:Number,
+            default:30
         },
-        computed:{
-            visibled:{
-                get(){
-                    return this.$attrs.visible;
-                },
-                set(){}
-            }
+        title:{
+            type:String,
+            default: '预览'
         },
-        methods: {
-            handleClose(done) {
-                this.$emit('update:visible',false);
-                done();
-            }
+        appendToBody:{// 是否嵌套 嵌套的 Dialog 必须指定该属性并赋值为 true
+            type:Boolean,
+            default: false
         }
-    };
+    },
+    data() {
+        return {};
+    },
+    computed:{
+        visibled:{
+            get(){
+                return this.$attrs.visible;
+            },
+            set(){}
+        }
+    },
+    methods: {
+        handleClose(done) {
+            this.$emit('update:visible',false);
+            done();
+        }
+    }
+}
 </script>
 
 <style lang="css" scoped>

@@ -4,6 +4,7 @@
         :visible.sync="$attrs.visible"
         :width="width+'%'"
         :close-on-click-modal="close"
+        :append-to-body="appendToBody"
         :before-close="handleClose"
         :destroy-on-close="true">
         <slot name="dialog"></slot>
@@ -30,6 +31,10 @@ export default {
             default: true
         },
         close:{
+            type:Boolean,
+            default: false
+        },
+        appendToBody:{// 是否嵌套 嵌套的 Dialog 必须指定该属性并赋值为 true
             type:Boolean,
             default: false
         }

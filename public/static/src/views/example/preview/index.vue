@@ -2,7 +2,8 @@
     <div class="Preview">
         <h2>点击查看大图</h2>
         <img :src="url" width="100" title="点击预览大图" @click="abc=true" style="cursor: pointer">
-        <component-preview :title="'查看原图'" :visible.sync="abc" :src="url"></component-preview>
+        <!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true-->
+        <component-preview :title="'查看原图'" :visible.sync="abc" :src="url" :appendToBody="true"></component-preview>
     </div>
 </template>
 

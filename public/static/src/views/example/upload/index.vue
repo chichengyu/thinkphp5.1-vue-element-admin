@@ -1,7 +1,8 @@
 <template>
     <div style="">
+        <!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true-->
         <!-- 单张 -->
-        <component-upload :action="'#'" :previewImages="url" :params="{name:'小二'}"
+        <component-upload :action="'#'" :previewImages="url" :params="{name:'小二'}" :appendToBody="false"
             @before="handleBefore"
             @success="handleSuccess"
             @remove="handleRemove">
@@ -47,8 +48,17 @@ export default {
         handleSuccess(response, file, fileList,params){
             console.log(response);
         },
-        handleRemove(file,params){
+        handleRemove(file,fileImageList,params,callBack,autoRequestCallBack){
             console.log('删除图片',file);
+            console.log(fileImageList);
+            console.log(params);
+            // fileImageList 已显示的图片列表数组，可以执行如代码进行删除显示图片，fileImageList.includes(file) && fileImageList.splice(fileImageList.indexOf(file),1);
+            // callBack 函数，执行后 删除界面上看到的图片列表
+            /**
+             * autoRequestCallBack 函数,接收辆个个参数，执行后自动请求服务器删除界面上看到的图片列表
+             * 参数一：为要删除的图片服务器接口
+             * 参数二：为要删除的图片路径
+             */
         },
         handleExcelBefore(file,params){
             console.log(params);
