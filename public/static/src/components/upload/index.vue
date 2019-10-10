@@ -107,13 +107,13 @@ export default {
         handleRemove(file) {
             this.$emit('remove',file,this.fileImageList,this.params,()=>{
                 this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1)
-            },(delImageUrl,params,header={},type='post')=>{
+            },(delImageUrl,params,type='post',header={})=>{
                 if (delImageUrl && params) {
                     this.axios.request({
                         // url:delUploadImageUrl,
                         url:delImageUrl,
                         method:type,
-                        headers,
+                        headers:header,
                         // data:{path:file.response.path}
                         data:params
                     }).then(res => {
