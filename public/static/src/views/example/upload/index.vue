@@ -11,7 +11,7 @@
         <hr>
 
         <!-- 多张 -->
-        <component-upload :action="action" :previewImages="images"
+        <component-upload :action="action" :previewImages="images" :multiple="true"
             @before="handleBefore"
             @success="handleSuccess"
             @remove="handleRemove" :autoUpload="true">
