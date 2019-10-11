@@ -2,7 +2,7 @@
     <div class="form" style="background:#fff;">
         <component-form :width="80" :data="form">
             <!--========== 方式一 （推荐） ==========-->
-            <!-- 无需再写 el-form-item,只需要将 formLabel种的 type 属性改为 slot ,即可使用 -->
+            <!-- 无需再写 el-form-item,只需要将 formLabel种的 type 属性改为 slot并设置 slot名称，(如：slot:'formItem'),即可使用 -->
             <div slot="formItem">
                 <el-input v-model="form.formFields.extend"></el-input>
                 <span style="font-size: 12px;color: red">扩展表单提示</span>
