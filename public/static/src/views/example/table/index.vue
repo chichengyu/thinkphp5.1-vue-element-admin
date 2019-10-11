@@ -2,7 +2,7 @@
     <div class="table">
         <component-table v-if="tableData.tableData.length>0" :data="tableData">
             <div slot="table">
-                <span>这是表格列扩展--局面插槽--</span>
+                <span>这是表格列扩展--具面插槽--</span>
             </div>
 
             <template v-slot="{params}">

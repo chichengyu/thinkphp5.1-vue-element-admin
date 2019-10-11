@@ -57,6 +57,10 @@
                 <el-date-picker v-if="item.type==='datetimerange'" type="datetimerange" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :value-format="item.format" :size="item.size" :disabled="item.disabled" :style="item.style||''" start-placeholder="开始时间" end-placeholder="结束时间"></el-date-picker>
                 <!-- swicth开关 -->
                 <el-switch v-if="item.type==='switch'" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :disabled="item.disabled" :active-value="item.activeValue" :inactive-value="item.inactiveValue" active-color="#52BEA6" inactive-color="#ff4949" :active-text="item.activeText||''" :inactive-text="item.inactiveText||''" class="switchStyle"></el-switch>
+                <!-- 提示信息 -->
+                <div v-if="item.msg" :style="item.msgStyle">{{ item.msg }}</div>
+                <!-- 扩展 -->
+                <slot v-if="item.type==='slot'&&item.slot" :name="item.slot"/>
             </el-form-item>
             <!-- 扩展 -->
             <slot name="form"/>
