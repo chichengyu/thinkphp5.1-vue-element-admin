@@ -1,6 +1,13 @@
 <template>
     <div class="form" style="background:#fff;">
         <component-form :width="80" :data="form">
+            <!-- 添加到表单开始使用 formTop -->
+            <template v-slot:formTop="{formTop}">
+                <el-form-item label="自定义表单提交验证" prop="extend">
+                    <el-button @click="test(formTop)">表单顶部显示</el-button>
+                </el-form-item>
+            </template>
+            <!-- form 默认追加到表单结尾，如添加到表单开始，可以使用 formTop -->
             <template slot="form">
                 <el-form-item label="扩展表单" prop="extend">
                     <el-input v-model="form.formFields.extend"></el-input>
@@ -25,6 +32,7 @@ export default {
                 inline:true,
                 labelPosition:'right',
                 formFields:{
+                    id: '11111111',
                     name: '',
                     nameLine:'',
                     number:1,
@@ -41,6 +49,7 @@ export default {
                     extend:'扩展表单',
                 },
                 formLabel:[
+                    {prop: 'id', title: '编号', type: 'text',tag:'span'},
                     {prop: 'name', title: '名称', type: 'input',disabled:false,prefixIcon:'el-icon-user',placeholder:'请输入姓名'},
                     {prop: 'nameLine', title: '同行显示', type: 'input',formItemStyle:{width:'500px'},style:{display:'inline-block',width:'100px',transform:'translateX(27px)'}},
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
@@ -149,6 +158,9 @@ export default {
                     ]
                 },
                 rules: {
+                    id: [
+                        { required: true},
+                    ],
                     name: [
                         { required: true, message: '请输入活动名称', trigger: 'blur' },
                         { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
