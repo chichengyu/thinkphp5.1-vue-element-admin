@@ -45,8 +45,18 @@ export default {
         handleBefore(file,params){
             console.log(file);
         },
-        handleSuccess(response, file, fileList,params){
+        handleSuccess(response, file, fileList,params,callback){
             console.log(response);
+            /** callback 上传完成提示后的回调
+             * 参数一：上传成功后的回调
+             * 参数二：上传失败后的回调
+             * callBack(() => {},() => {})
+             */
+            callback(() => {
+                console.log('上传成功后的逻辑');
+            },() => {
+                console.log('上传失败后的逻辑');
+            });
         },
         handleRemove(file,fileImageList,params,callBack,autoRequestCallBack){
             console.log('删除图片',file);

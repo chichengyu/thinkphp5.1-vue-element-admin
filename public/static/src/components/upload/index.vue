@@ -144,7 +144,15 @@ export default {
         },
         handleSuccess(response, file, fileList){
             this.fileImageList = fileList;
-            this.$emit('success',response, file, fileList,this.params);
+            this.$emit('success',response, file, fileList,this.params,(success,error)=>{
+                if (response.code == 1){
+                    this.success('上传成功！');
+                    return success && success();
+                }else{
+                    this.error('上传失败！');
+                    return error && error();
+                }
+            });
         },
         handleError(err, file, fileList){
             this.$emit('error',err, file, fileList,this.params);
