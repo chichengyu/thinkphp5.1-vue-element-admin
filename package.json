@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p --env production --mode production --hide-modules --progress --color --config webpack.config.js",
     "watch": "npx webpack -d --env development --mode development --hide-modules --watch --progress --color --config webpack.config.js",
-    "build:dev": "npx webpack -d --env development --mode development --progress --color --config webpack.config.js",
+    "build:test": "npx webpack -d --env development --mode development --progress --color --config webpack.config.js",
     "dev": "npx webpack-dev-server -d --env development --mode development --progress --inline --hot --open --config webpack.config.js"
   },
   "keywords": [],
