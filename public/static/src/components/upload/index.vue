@@ -107,7 +107,7 @@ export default {
         handleRemove(file) {
             this.$emit('remove',file,this.fileImageList,this.params,()=>{
                 this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1)
-            },(delImageUrl,params,type='post',header={})=>{
+            },(delImageUrl,params,callBack,type='post',header={})=>{
                 if (delImageUrl && params) {
                     this.axios.request({
                         // url:delUploadImageUrl,
@@ -123,7 +123,8 @@ export default {
                         }else{
                             this.error('删除失败！');
                         }
-                        this.$emit('remove',file,this.params);
+                        // this.$emit('remove',file,this.params);
+                        return callBack && callBack();
                     }).catch(err => {
                         return Promise.reject('删除失败！',err);
                     });
@@ -137,7 +138,7 @@ export default {
             this.visible = true;
         },
         handleBefore(file){
-            this.$emit('before',file,this.params);
+            return this.$emit('before',file,this.params);
         },
         handleSuccess(response, file, fileList){
             this.fileImageList = fileList;
