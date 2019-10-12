@@ -126,7 +126,7 @@ export default {
                             this.error('删除失败！');
                         }
                         // this.$emit('remove',file,this.params);
-                        return callBack && callBack();
+                        return callBack && callBack(res);
                     }).catch(err => {
                         return Promise.reject('删除失败！',err);
                     });
