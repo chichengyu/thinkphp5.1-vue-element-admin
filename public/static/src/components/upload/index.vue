@@ -90,15 +90,17 @@ export default {
         previewImages:{
             immediate:true,
             handler(val){
-                let type = typeof val;
-                if (type == 'string'){
-                    this.fileImageList = [{name:'01',url:val}];
-                }else if (type == 'object'){
-                    let arr = [];
-                    for (let key in val) {
-                        arr.push({name:key,url:val[key]});
+                if (val){
+                    let type = typeof val;
+                    if (type == 'string'){
+                        this.fileImageList = [{name:'01',url:val}];
+                    }else if (type == 'object'){
+                        let arr = [];
+                        for (let key in val) {
+                            arr.push({name:key,url:val[key]});
+                        }
+                        this.fileImageList = arr;
                     }
-                    this.fileImageList = arr;
                 }
             }
         },
