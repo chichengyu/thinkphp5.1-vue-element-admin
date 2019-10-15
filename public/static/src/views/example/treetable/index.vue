@@ -11,7 +11,7 @@
                 <span>这是表格列扩展--作用域插槽2222--省：{{scope.row.province}}</span>
             </template>
 
-            <!-- 按钮 --->
+            <!-- 按钮扩展： 需要在 tableOption 里加上 slot:true --->
             <template v-slot:button="{scope}">
                 <el-button type="warning" size="mini" @click="handleClick(scope)">按钮 </el-button>
             </template>
