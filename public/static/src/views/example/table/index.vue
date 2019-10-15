@@ -1,18 +1,16 @@
 <template>
     <div class="table">
         <component-table v-if="tableData.tableData.length>0" :data="tableData">
-            <!-- 方式一： 列 abc随意取的，需要在 tableLabel 中定义 slot:'abc' --->
-            <!-- 注意：slot的命名必须不能相同 --->
-            <template slot="abc">
-                <div>这是表格列扩展--具名插槽--</div>
+            <!-- 列，abc，col 随意取的，需要在 tableLabel 中定义 slot:'abc'、slot:'col'，scope 为当前行参数 -->
+            <!-- ***** 注意：slot的命名必须不能相同 ***** -->
+            <template v-slot:abc="{scope}">
+                <span>这是表格列扩展--作用域插槽1111--id：{{scope.row.id}}</span>
             </template>
-            <!-- 方式二： 列，不需要在 tableLabel 中定义 slot --->
             <template v-slot:col="{scope}">
-                <span>这是表格列扩展--作用域插槽--id：{{scope.row.id}}</span>
+                <span>这是表格列扩展--作用域插槽2222--省：{{scope.row.province}}</span>
             </template>
 
-
-            <!-- 按钮 --->
+            <!-- 按钮扩展： 需要在 tableOption 里加上 slot:true --->
             <template v-slot:button="{scope}">
                 <el-button v-if="scope.row.id>0" type="warning" size="mini" @click="handleClick(scope)">按钮 </el-button>
             </template>
@@ -36,7 +34,7 @@ export default {
                 tableOption:{
                     label:'操作',
                     width:230,
-                    slot:true,
+                    slot:true,// 按钮操作扩展
                     buttons:[
                         {title:'查看',click:(params,currentBtn) => {
                             console.log(params);
@@ -95,7 +93,7 @@ export default {
                     return [params.row.name,{color:'blue'}];
                 }},
                 {prop:'date',title:'日期',minWidth:150,slot:'abc',/** 扩展列：slot:'col' **/},
-                {prop:'province',title:'省份'},
+                {prop:'province',title:'省份',slot:'col',minWidth:150,},
                 {prop:'city',title:'城市'},
                 {prop:'address',title:'地址',tooltip:true,width:150},
                 {prop:'zip',title:'邮编',sort:'custom'},

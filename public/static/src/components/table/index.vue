@@ -80,8 +80,7 @@
                             <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
                         </div>
                         <div v-else-if="col.slot">
-                            <slot :name="col.slot"></slot>
-                            <slot name="col" v-bind:scope="scope"></slot>
+                            <slot :name="col.slot" v-bind:scope="scope"></slot>
                         </div>
                         <div v-else-if="col.render">
                             <div v-if="col.render(scope,col).length==2" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
