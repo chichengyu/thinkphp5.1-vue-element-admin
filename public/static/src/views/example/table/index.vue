@@ -1,12 +1,20 @@
 <template>
     <div class="table">
         <component-table v-if="tableData.tableData.length>0" :data="tableData">
-            <div slot="table">
-                <span>这是表格列扩展--具名插槽--</span>
-            </div>
+            <!-- 方式一： 列 abc随意取的，需要在 tableLabel 中定义 slot:'abc' --->
+            <!-- 注意：slot的命名必须不能相同 --->
+            <template slot="abc">
+                <div>这是表格列扩展--具名插槽--</div>
+            </template>
+            <!-- 方式二： 列，不需要在 tableLabel 中定义 slot --->
+            <template v-slot:col="{scope}">
+                <span>这是表格列扩展--作用域插槽--id：{{scope.row.id}}</span>
+            </template>
 
-            <template v-slot="{params}">
-                <span>这是表格列扩展--作用域插槽-{{ params.row.id }}</span>
+
+            <!-- 按钮 --->
+            <template v-slot:button="{scope}">
+                <el-button v-if="scope.row.id>0" type="warning" size="mini" @click="handleClick(scope)">按钮 </el-button>
             </template>
         </component-table>
     </div>
@@ -28,6 +36,7 @@ export default {
                 tableOption:{
                     label:'操作',
                     width:230,
+                    slot:true,
                     buttons:[
                         {title:'查看',click:(params,currentBtn) => {
                             console.log(params);
@@ -85,7 +94,7 @@ export default {
                 {prop:'name',title:'名称',width:100,render:(params,col) => {
                     return [params.row.name,{color:'blue'}];
                 }},
-                {prop:'date',title:'日期',minWidth:150,slot:'table',/** 扩展列：slot:'table' **/},
+                {prop:'date',title:'日期',minWidth:150,slot:'abc',/** 扩展列：slot:'col' **/},
                 {prop:'province',title:'省份'},
                 {prop:'city',title:'城市'},
                 {prop:'address',title:'地址',tooltip:true,width:150},
@@ -112,6 +121,9 @@ export default {
                 {id:5, date: '2016-05-01', name: '王小5', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1519 弄', zip: 200333, status:0,img:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'}];
             this.tableData.tableData = data;
         },
+        handleClick(scope){
+            console.log(scope);
+        }
     },
 }
 </script>
