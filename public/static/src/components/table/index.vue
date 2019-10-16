@@ -142,7 +142,7 @@ export default {
     props:{
         data:{
             type:Object,
-            default:() => {}
+            required:true
         },
     },
     data() {return {count:0,visibled:false,previewUrl:''}},
