@@ -127,7 +127,7 @@
         </el-table>
 
         <!-- 分页 -->
-        <el-pagination :align="data.page.align" :total="data.page.total" :current-page="data.page.currentPage" @current-change="data.page.currentChange" background layout="prev, pager, next"></el-pagination>
+        <el-pagination v-if="data.page" :align="data.page.align" :total="data.page.total" :current-page="data.page.currentPage" @current-change="data.page.currentChange" background layout="prev, pager, next"></el-pagination>
 
         <!-- 缩略图查看 -->
         <el-dialog title="预览" :visible.sync="visibled" :close-on-click-modal="false">
