@@ -38,11 +38,11 @@ export default {
             rules: {
                 username: [
                     { required: true, message: '请输入账号', trigger: 'blur' },
-					{ pattern:this.$validator.regExpPhone, message: '账号输入不正确', trigger: 'blur' }
+					{ pattern:this.validator.regExpPhone, message: '账号输入不正确', trigger: 'blur' }
                 ],
                 password: [
                     { required: true, message: '请输入密码', trigger: 'blur' },
-					{ pattern:this.$validator.regExpPassword, message: '密码长度不正确', trigger: 'blur' }
+					{ pattern:this.validator.regExpPassword, message: '密码长度不正确', trigger: 'blur' }
                 ]
             }
         }
