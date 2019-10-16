@@ -34,7 +34,7 @@ export default {
             type:String,
             default: '预览'
         },
-        appendToBody:{
+        appendToBody:{// 是否嵌套 嵌套的 Dialog 必须指定该属性并赋值为 true
             type:Boolean,
             default: false
         }
