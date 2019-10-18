@@ -44,7 +44,7 @@ const getAccessRoutes = (routesMap,rulesIds) => {
 		}
 	});
 	// newRouter[newRouter.length-1] = routesMap[routesMap.length-1];
-	newRouter[newRouter.length-1] = routesMap[routesMap.length-1];
+	newRouter[newRouter.length] = routesMap[routesMap.length-1];
 	return newRouter;
 };
 

@@ -1,8 +1,7 @@
 <template>
-    <el-container style="height: 100%; border: 1px solid #eee">
-        <el-aside class="sider" width="auto" style="background-color: #515a6e">
-            <el-menu v-if="siderBarList.length"
-                    :collapse="isCollapse"
+    <el-container style="height:100%;border:1px solid #eee">
+        <el-aside class="sider" width="auto" style="background-color:#515a6e">
+            <el-menu :collapse="isCollapse"
                     :default-active="menuIndex"
                     class="el-menu-vertical-demo"
                     @select="handleSelectMenu"
@@ -29,7 +28,7 @@
             </el-menu>
         </el-aside>
         <el-container>
-            <el-header style="color: #515a6e;text-align: right">
+            <el-header style="color:#515a6e;text-align:right">
                 <div class="left" style="float: left;display: flex;">
                     <div @click.stop="isCollapse=!isCollapse"><i :class="iconClassName" style="font-size: 22px;"></i></div>
                     <div style="margin-left: 22px">
@@ -52,7 +51,7 @@
                     <router-view slot='fadeIn'/>
                 </fade-in>
             </el-main>
-            <el-footer align="center" style="background:#f5f7f9;line-height: 60px;font-size: 14px;">
+            <el-footer align="center" style="background:#fff;line-height:60px;font-size:14px;">
                 <span>{{ title }}</span>
             </el-footer>
         </el-container>
@@ -78,29 +77,35 @@ export default {
         }
     },
     beforeCreate () {
-        let first = this.$store.getters.siderList[0];
-        let url  = '';
-        if(first.children){
-            url = first.children[0].path;
-        }else {
-            url = first.path;
+        let first = this.$store.getters.siderList;
+        let url  = '/401';
+        if (first.length > 0){
+            first = first[0];
+            if(first.children){
+                url = first.children[0].path;
+            }else {
+                url = first.path;
+            }
         }
-        // 登陆成功默认跳转地址
-        this.$router.push(url);
+        this.$router.push(url);// 登陆成功默认跳转地址
     },
     created() {
         this.siderBarList = this.$store.getters.siderList;
         setTimeout(() => {
-            let first = this.siderBarList[0];
-            if (first.children){
-                first = first.children[0];
-                this.menuIndex = '0-0';
-            }else {
-                first = this.siderBarList[0];
-                this.menuIndex = '0';
+            if (this.siderBarList.length > 0){
+                let first = this.siderBarList[0];
+                if (first.children){
+                    first = first.children[0];
+                    this.menuIndex = '0-0';
+                }else {
+                    first = this.siderBarList[0];
+                    this.menuIndex = '0';
+                }
+                first.tabBtnActive = true;
+                this.tabBtnList.push(first);
+            }else{
+                this.$message.error({message:'没有权限',center:true});
             }
-            first.tabBtnActive = true;
-            this.tabBtnList.push(first);
         });
     },
     computed:{
@@ -110,7 +115,7 @@ export default {
     },
     methods: {
         handleSelectMenu (index,indexPath) {
-            this.menuIndex = index;
+            this.menuIndex = index;// 默认菜单选中
             // 二级菜单
             let currentNav = null;
             if (String(index).includes('-')){
@@ -220,7 +225,7 @@ export default {
     color: #fff !important;
 }
 .el-main{
-    padding: 5px 2px;
+    padding:0;
     background: #f5f7f9;
 }
 </style>

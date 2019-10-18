@@ -13,15 +13,16 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="css" scoped>
 .notAuth{
-	height: 100%;
+	/*width: 100%;*/
+	/*height: 100%;*/
 	background: #fff;
-
-	h1{
-		padding: 32px;
-		font-size: 32px; 
-		text-align: center;
-	}
+	/*overflow: hidden;*/
+}
+.notAuth > h1{
+	padding: 32px;
+	font-size: 32px;
+	text-align: center;
 }
 </style>
