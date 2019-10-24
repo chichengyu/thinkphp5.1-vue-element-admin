@@ -1,12 +1,12 @@
 <?php
-namespace app\api\service\pay;
+namespace app\admin\service\pay;
 
 /** 微信支付
  * Class PayAlipay
  * @package pay
  */
 
-use app\api\service\Notify;
+use app\admin\service\Notify;
 use Yansongda\Pay\Pay;
 use Yansongda\Pay\Log;
 
@@ -15,7 +15,9 @@ class PayWechat{
         'app_id' => 'wx9d9304cfb8c3dcbb',
         'mch_id' => '1522855121',
         'key' => 'e5e64ada5521f8024612d4cff456805b',
-        'notify_url' => 'http://store.cybcar.cn/api/v1/notify',
+        'notify_url' => 'http://ht.cybcar.cn/api/v1/notify',
+//        'cert_client' => './cert/apiclient_cert.pem', // optional，退款等情况时用到
+//        'cert_key' => './cert/apiclient_key.pem',// optional，退款等情况时用到
         'log' => [
             'file' => './static/paylog/wechat.log',
             'level' => 'info',
@@ -29,6 +31,10 @@ class PayWechat{
         ],
     ];
 
+    /** 支付
+     * @param $order
+     * @return \Yansongda\Supports\Collection
+     */
     public function index($order){
         $pay = Pay::wechat($this->config)->scan($order);
         return $pay;
@@ -56,7 +62,7 @@ class PayWechat{
             Log::debug('Wechat notify', $data->all());
         } catch (\Exception $e) {
 //             $e->getMessage();
-            file_put_contents('000.log',$e->getMessage());
+//            file_put_contents('000.log',$e->getMessage());
         }
         return $pay->success()->send();
     }
@@ -73,4 +79,23 @@ class PayWechat{
         return false;
     }
 
+    /** 退款
+     * @param $params
+     */
+    public function refund($params){
+        try{
+            $path = dirname(__FILE__);
+            $this->config['cert_client'] = $path.'/cert/wechat/apiclient_cert.pem';
+            $this->config['cert_key'] = $path.'/cert/wechat/apiclient_key.pem';
+            $pay = Pay::wechat($this->config);
+            $result = $pay->refund($params);
+            if ($result && $result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
+                return true;
+            }
+            return false;
+        }catch (\Exception $e){
+            return false;
+        }
+
+    }
 }
