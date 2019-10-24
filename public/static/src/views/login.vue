@@ -76,7 +76,7 @@ export default {
 				this.$progress.done();
             	return;
         	}
-            this.$refs[name].validate((valid) => {
+			this.$refs[name].validate((valid) => {
                 if (valid) {
 					login({username,password}).then(res => {
 						res = res.data;
@@ -84,11 +84,13 @@ export default {
 							this.$ls.set(userInfo,res.data);
 							this.$store.dispatch('setUserInfo',res.data);
 							this.success(res.msg);
-							this.$router.push('/home');
+							this.$router.push('/loan/loan');
 		        		}else {
 							this.error(res.msg);
 						}
 						this.$progress.done();
+					}).catch(err => {
+						return this.error('登陆失败！');
 					});
                 } else {
 					this.$progress.done();

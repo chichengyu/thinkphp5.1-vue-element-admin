@@ -44,7 +44,7 @@ class BaseController extends Controller{
      * @param $dirPath  保存路径
      * @return array
      */
-    protected function imageUpload($file,$dirPath,$ext='jpg,png,gif',$size=1024*1024*2){
+    public function imageUpload($file,$dirPath,$ext='jpg,png,gif',$size=1024*1024*2){
         $path = $_SERVER['DOCUMENT_ROOT'].'/';
         $subPath = 'static/uploads/'.$dirPath.'/'.date('Y-m');
         is_dir($path.$subPath) || mkdir($path.$subPath,0777,true);
@@ -59,7 +59,7 @@ class BaseController extends Controller{
      * @param $path  图片路径
      * @return bool
      */
-    protected function delImage($path){
+    public function delImage($path){
         try{
             @unlink('.'.$path);
             return true;

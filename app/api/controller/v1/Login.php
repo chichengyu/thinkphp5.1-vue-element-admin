@@ -4,23 +4,25 @@ namespace app\api\controller\v1;
 use app\api\controller\BaseController;
 use app\lib\Token;
 use think\Request;
-use app\api\model\StorePersonnel as StorePersonnelModel;
-use app\api\model\StoreAuthGroup as AuthGroupModel;
+use app\api\model\Administrators as AdministratorsModel;
+use app\api\model\AuthGroup as AuthGroupModel;
 
 class Login extends BaseController {
 
     /**  登陆
      * @param Request $request
-     * @return \think\response\Json
      */
     public function login(Request $request)
     {
         if ($request->isPost()){
             $username = $request->post('username');
             $password = $request->post('password');
-            $user = StorePersonnelModel::where('tel',$username)->find();
+            $user = AdministratorsModel::where('tel',$username)->find();
             if (!$user){
                 return $this->responseError('账号不存在');
+            }
+            if ($user->status == 0){
+                return $this->responseError('账号已禁用，请联系管理员！');
             }
             if (!password_verify($password,$user->password)){
                 return $this->responseError('密码错误');
@@ -59,7 +61,7 @@ class Login extends BaseController {
             if ($user->group_id > 0){
                 $group = AuthGroupModel::where('id',$user->group_id)->find();
                 if (!$group){
-                    return $this->res_json('登录失败');
+                    return $this->responseError('登录失败');
                 }
             }
             session('group_id',$user->group_id);
@@ -71,11 +73,8 @@ class Login extends BaseController {
             $data['roles'] = 1;
             $data['rules'] = [];
         }
-//        session($token,$data);
         session($token,$user);
-//        session('uid',$user->id);
-//        session('store_id',$user->store_id);
-//        session('is_store_status',$user->status);
+        cache('SID'.$user->id,session_id());
         return $data;
     }
 }

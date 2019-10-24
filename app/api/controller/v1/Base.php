@@ -29,6 +29,11 @@ class Base extends BaseController{
         if (!$userInfo){
             throw new LoginException(['msg'=>'请先登陆']);
         }
+        $cacheToken = cache('SID'.$userInfo->id);
+        if($cacheToken && $cacheToken != session_id()){
+            session(null);
+            throw new LoginException(['msg'=>'账号异地登陆，你已被迫下线']);
+        }
         $this->userInfo = $userInfo;
         if ($userInfo->id == 1){
             return true;
@@ -40,7 +45,7 @@ class Base extends BaseController{
                 session(null);
                 throw new LoginException(['msg'=>'请重新登陆']);
             }
-            if ($user['status'] == 1){
+            if ($user['status'] == 0){
                 session(null);
                 throw new LoginException(['msg'=>'账号已禁用，请联系管理员']);
             }

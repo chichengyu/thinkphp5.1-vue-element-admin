@@ -4,7 +4,7 @@ namespace app\api\validate;
 class AuthGroupsValidate extends BaseValidate{
 
     protected $rule = [
-        'title'      => 'require|unique:store_auth_group|min:1|max:16',
+        'title'      => 'require|unique:auth_group|min:1|max:16',
     ];
 
     protected $message = [

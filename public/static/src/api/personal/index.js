@@ -1,50 +1,17 @@
 import axios from '@/api'
 
-/******************* 账号列表 *******************/
-export const getTableData = (page,limit,keywords) => {
-	return axios.request({
-		url:'/number_user/lst?page='+page+'&limit='+limit+keywords,
-		method:'get',
-	});
-};
-
-
-/******************* 账号添加 *******************/
-export const add = (data) => {
-	return axios.request({
-		url:'/number_user/add',
-		method:'post',
-		data:data
-	});
-};
-
-/******************* 账号编辑 *******************/
-export const edit = (data,id) => {
-	return axios.request({
-		url:'/number_user/edit/'+id,
-		method:'post',
-		data:data
-	});
-};
-
-/******************* 账号删除 *******************/
-export const del = (id) => {
-	return axios.request({
-		url:'/number_user/del/'+id,
-		method:'get',
-	});
-};
-
 /******************* 个人资料 *******************/
-export const myUser = () => {
+export const getPersonal = () => {
 	return axios.request({
-		url:'/my/user',
+		url:'/administrators/personal',
 		method:'get',
 	});
 };
-export const myEdit = (data) => {
+
+/******************* 密码修改 *******************/
+export const editPassword = (data) => {
 	return axios.request({
-		url:'/my/edit',
+		url:'/administrators/personal/edit',
 		method:'post',
 		data:data
 	});

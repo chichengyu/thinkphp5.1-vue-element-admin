@@ -1,21 +1,23 @@
 <template>
-    <div class="groups">
+    <div class="adminUser">
         <div class="header">
             <el-button v-has="'add'" type="primary" @click="handleTable(true,'showTableAdd')" >添加</el-button>
+            <div class="search" style="display: inline-block">
+                <el-input v-model="search.keywords" placeholder="请输入手机"></el-input>
+            </div>
+            <el-button type="primary" @click="handleSearch" >搜索</el-button>
         </div>
         <component-table :data="tableData">
             <template v-slot:button="{scope}">
-                <el-button v-has="'auth'" type="success" size="mini" @click="handleAuth(scope)">分配权限</el-button>
-                <el-button v-has="'edit'" type="primary" size="mini" @click="handleEdit(scope)">编辑</el-button>
+                <el-button v-has="'passwrod'" v-if="scope.row.id>0" type="success" size="mini" @click="handleResetPassword(scope)">重置密码</el-button>
+                <el-button v-has="'edit'" v-if="scope.row.id>0" type="primary" size="mini" @click="handleEdit(scope)">编辑</el-button>
                 <component-popover v-has="'del'" :params="scope.row" @ok="handleOk" @cancel="handleCancel"></component-popover>
             </template>
         </component-table>
 
         <component-dialog v-if="show" :width="50" :title="optionText" :visible.sync="show" :footer="false">
-            <!-- 添加 -->
-            <table-add slot="dialog" v-if="showTable.showTableAdd" @handleGetTableData="handleGetTableData"></table-add>
-            <table-edit slot="dialog" ref="tableEdit" v-if="showTable.showTableEdit" @handleGetTableData="handleGetTableData"></table-edit>
-            <table-auth slot="dialog" ref="tableAuth" v-if="showTable.showTableAuth" @handleGetTableData="handleGetTableData" :rules="rules"></table-auth>
+            <table-add slot="dialog" v-if="showTable.showTableAdd" :groups="groups" @handleGetTableData="handleGetTableData"></table-add>
+            <table-edit slot="dialog" ref="tableEdit" v-if="showTable.showTableEdit" :groups="groups" @handleGetTableData="handleGetTableData"></table-edit>
         </component-dialog>
     </div>
 </template>
@@ -23,15 +25,13 @@
 <script>
 import tableAdd from './components/add.vue'
 import tableEdit from './components/edit.vue'
-import tableAuth from './components/auth.vue'
-import { getTableData,edit,del } from '@/api/groups'
+import { getTableData,edit,password,del } from '@/api/adminUser'
 
 export default {
-    name: "index",
+    name: "adminUser",
     components:{
         tableAdd,
         tableEdit,
-        tableAuth
     },
     data () {
         return {
@@ -39,15 +39,15 @@ export default {
             showTable:{
                 showTableAdd:false,
                 showTableEdit:false,
-                showTableAuth:false,
             },
             currentPage:1,
             optionText:'',
             rules:null,
+            groups:null,
             search:{
                 keywords:''
             },
-            visible:false,
+            // visible:false,
             tableData: {
                 loading:false,
                 // 请求回来的数据
@@ -60,19 +60,25 @@ export default {
                     width:250,
                     slot:true,
                     // buttons:[
-                    //     {title:'分配权限',type:'success',click:(params) => {
-                    //         this.handleTable(true, 'showTableAuth', '分配权限');
-                    //         this.$nextTick(() => {
-                    //             this.$refs.tableAuth && this.$refs.tableAuth.currentData(params.row)
-                    //         })
+                    //     {title:'重置密码',type:'success',style:(params,item) => params.row.id==1?{display:'none'}:'',click:(params,item) => {
+                    //         this.confirm('你确定要重置密码?',()=>{
+                    //             password(params.row.id).then(res => {
+                    //                 if (res.data.code == 1){
+                    //                     return this.success(res.data.msg);
+                    //                 }
+                    //                 return this.success(res.data.msg);
+                    //             });
+                    //         },()=>{
+                    //             this.warning('取消重置密码');
+                    //         });
                     //     }},
-                    //     {title:'编辑',directives:[{name:'has',value:'edit'}],type:'primary',click: (params) => {
-                    //         this.handleTable(true, 'showTableEdit', '编辑用户组');
+                    //     {title:'编辑',directives:[{name:'has',value:'edit'}],type:'primary',style:(params,item) => params.row.id==1?{display:'none'}:'',click: (params) => {
+                    //         this.handleTable(true, 'showTableEdit', '编辑用户');
                     //         this.$nextTick(() => {
                     //             this.$refs.tableEdit && this.$refs.tableEdit.currentData(params.row)
                     //         })
                     //     }},
-                    //     {title:'删除',tooltip:true,directives:[{name:'has',value:'del'}],type:'danger',click:{
+                    //     {title:'删除',tooltip:true,directives:[{name:'has',value:'del'}],type:'danger',style:(params,item) => params.row.id==1?{display:'none'}:'',click:{
                     //         ok:(params) => {
                     //             del(params.row.id).then(res => {
                     //                if (res.data.code == 1){
@@ -109,10 +115,14 @@ export default {
         labelInit(){
             this.tableData.tableLabel = [
                 {prop:'id',title:'ID',type:'index',fixed:true,width:60,align:'center'},
-                {prop:'title',title:'名称'},
-                {prop:'status',title:'状态',isSwitch:true,width:80,change:(currentData) => {
-                    let txt = currentData.row.status==1?'启用用户组':'禁用用户组';
-                    edit(currentData.row,currentData.row.id).then(res => {
+                {prop:'tel',title:'手机'},
+                {prop:'name',title:'姓名'},
+                {prop:'address_id',title:'地区'},
+                {prop:'store_name',title:'店面名称'},
+                {prop:'group_id',title:'用户组',render:(params) => [params.row.title]},
+                {prop:'status',title:'状态',isSwitch:true,width:80,style:(params,item)=>{return params.row.id==1?{display:'none'}:''},change:(params) => {
+                    let txt = params.row.status==1?'启用账号':'禁用账号';
+                    edit(params.row,params.row.id).then(res => {
                         if (res.data.code == 1){
                             return this.success(txt);
                         }
@@ -128,28 +138,38 @@ export default {
                 if (res.data.code == 1) {
                     this.tableData.tableData = res.data.data.data.data;
                     this.tableData.page.total = res.data.data.total;
-                    this.rules = res.data.data.rules;
+                    this.groups = res.data.data.groups;
                 } else {
                     this.jumpUrl(res.data,this);
                 }
                 this.tableData.loading = false;
             });
         },
-        handleTable(flag,type='',text='添加用户组'){
+        handleTable(flag,type='',text='添加用户'){
             ObjectforIn(this.showTable,false);
             this.optionText = text;
             this.show = flag;
             this.showTable[type] = flag;
         },
+        // 搜索
+        handleSearch(){
+            this.tableDataInit(this.tableData.page.currentPage,pageOffset,handleSearchData({...this.search}));
+        },
         /****************************** 操作 ******************************/
-        handleAuth(params){
-            this.handleTable(true, 'showTableAuth', '分配权限');
-            this.$nextTick(() => {
-                this.$refs.tableAuth && this.$refs.tableAuth.currentData(params.row)
-            })
+        handleResetPassword(params){
+            this.confirm('你确定要重置密码?',()=>{
+                password(params.row.id).then(res => {
+                    if (res.data.code == 1){
+                        return this.success(res.data.msg);
+                    }
+                    return this.success(res.data.msg);
+                });
+            },()=>{
+                this.warning('取消重置密码');
+            });
         },
         handleEdit(params){
-            this.handleTable(true, 'showTableEdit', '编辑用户组');
+            this.handleTable(true, 'showTableEdit', '编辑用户');
             this.$nextTick(() => {
                 this.$refs.tableEdit && this.$refs.tableEdit.currentData(params.row)
             })
